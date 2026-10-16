@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d2733">
+<title>NEAR LAB — Olimpíada Cognitiva | Jornada 2028</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f3f6f6;--panel:#fff;--ink:#0d2733;--ink2:#2c4655;--muted:#586c78;--line:#dbe4e7;--soft:#e9f2f0;
+  --brand:#0b7a6c;--brand-d:#075a50;--pop:#ff5a1f;--pop-d:#cc3d0a;--gold:#f2b705;--ok:#17803d;--bad:#c23a3a;--warn:#8a6200;
+  --r:16px;--shadow:0 1px 2px rgba(13,39,51,.06),0 10px 28px rgba(13,39,51,.07);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{line-height:1.12;letter-spacing:-.02em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.muted{color:var(--muted)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:200}
+.skip:focus{left:8px}
+.eyebrow{display:inline-block;text-transform:uppercase;font-size:12px;letter-spacing:1.4px;font-weight:750;color:var(--brand)}
+.view{padding-bottom:56px}
+.view>.wrap>h1:focus,.view h1:focus{outline:none}
+
+/* ---------- topo ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(243,246,246,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{display:flex;align-items:center;gap:20px;height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.brand .logo{width:36px;height:36px;flex:none}
+.brand b{display:block;font-size:17px;letter-spacing:2.2px;font-weight:800;line-height:1.1}
+.brand small{display:block;font-size:10px;letter-spacing:1.2px;color:var(--muted);font-weight:600;text-transform:uppercase}
+.nav{display:flex;gap:4px}
+.nav a{padding:9px 16px;border-radius:999px;font-weight:650;font-size:15px;color:var(--muted);text-decoration:none}
+.nav a:hover{background:var(--soft);color:var(--ink)}
+.nav a[aria-current=page]{background:var(--ink);color:#fff}
+.chip{display:flex;align-items:center;gap:10px;font:inherit;border:1.5px solid #c5d3d8;background:#fff;border-radius:999px;padding:5px 14px 5px 5px;cursor:pointer;min-height:44px;color:var(--ink)}
+.chip:hover{border-color:var(--ink)}
+.chip .av{width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px}
+.chip .tx{display:grid;text-align:left;line-height:1.15}
+.chip .tx b{font-size:14px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip .tx small{font-size:12px;color:var(--pop-d);font-weight:700}
+.chip.empty{padding:0 18px;font-weight:700}
+
+/* ---------- botões ---------- */
+.btn{font:inherit;font-weight:650;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:12px;border:1.5px solid #c5d3d8;background:#fff;color:var(--ink);cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s,transform .1s;-webkit-tap-highlight-color:transparent}
+.btn:hover:not(:disabled){border-color:var(--ink)}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn-go{background:var(--pop-d);border-color:var(--pop-d);color:#fff}
+.btn-go:hover:not(:disabled){background:#a83007;border-color:#a83007}
+.btn-ink{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-ink:hover:not(:disabled){background:#1d4155}
+.btn-ghost{background:transparent;border-color:transparent;color:var(--ink2)}
+.btn-ghost:hover:not(:disabled){background:var(--soft);border-color:transparent}
+.btn-lg{min-height:56px;padding:0 30px;font-size:17px;border-radius:14px}
+.btn-sm{min-height:38px;padding:0 14px;font-size:14px;border-radius:10px}
+
+/* ---------- início ---------- */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:56px 0 40px}
+.hero h1{font-size:clamp(46px,8.4vw,92px);font-weight:850;letter-spacing:-.045em;line-height:.98;margin:18px 0 22px}
+.hero h1 span{color:var(--brand)}
+.lead{font-size:clamp(18px,2.2vw,21px);color:var(--ink2);max-width:540px;line-height:1.45}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero-facts{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;color:var(--muted);font-size:14px;font-weight:600}
+.hero-facts span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pop);margin-right:8px}
+.hero-card{position:relative;overflow:hidden;border-radius:24px;background:radial-gradient(120% 120% at 100% 0,#16506a 0,var(--ink) 60%);color:#fff;padding:34px;min-height:400px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:var(--shadow)}
+.hero-card svg.track{position:absolute;inset:0;width:100%;height:100%}
+.hero-card .in{position:relative}
+.hero-card .big{font-size:96px;font-weight:850;letter-spacing:-.05em;line-height:.9}
+.hero-card .big-l{font-size:22px;font-weight:650;margin-top:6px}
+.hero-card .plus{margin-top:6px;color:#b8d3dc;font-size:15px}
+.mini-icons{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.mini-icons span{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff}
+.mini-icons svg{width:20px;height:20px}
+.section{padding:36px 0 8px}
+.section>h2,.section-h h2{font-size:clamp(26px,3.6vw,36px);font-weight:800;margin:10px 0 22px}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step3{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.step3 .n{width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;margin-bottom:16px}
+.step3 h3{font-size:20px;margin-bottom:6px}
+.step3 p{color:var(--muted);font-size:15px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tile-link{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;text-decoration:none;transition:border-color .15s,transform .15s,box-shadow .15s}
+.tile-link:hover{border-color:var(--c);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tile-link b{display:block;font-size:15px;line-height:1.2}
+.tile-link small{color:var(--muted);font-size:12px}
+.ico{flex:none;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 13%,#fff)}
+.ico svg{width:24px;height:24px}
+.cta-band{margin-top:40px;background:var(--ink);color:#fff;border-radius:24px;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cta-band h2{font-size:clamp(26px,3.6vw,36px);font-weight:800;max-width:520px}
+.cta-band p{color:#b8d3dc;margin-top:8px}
+
+/* ---------- jogos (hub) ---------- */
+.page-head{padding:40px 0 22px}
+.page-head h1{font-size:clamp(34px,5vw,52px);font-weight:850;letter-spacing:-.04em;margin-top:10px}
+.page-head p{color:var(--muted);margin-top:10px;max-width:560px}
+.progress-card{display:flex;gap:28px;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin-bottom:14px}
+.pc-item small{display:block;font-size:12px;color:var(--muted);font-weight:650;text-transform:uppercase;letter-spacing:.6px}
+.pc-item b{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.pc-item b.pts{color:var(--pop-d)}
+.pc-bar{flex:1;min-width:180px}
+.bar{height:10px;border-radius:99px;background:#e4ecee;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--brand);border-radius:99px;transition:width .4s}
+.suggest{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#fff4ee;border:1.5px solid #ffc9b0;border-radius:var(--r);padding:16px 20px;margin-bottom:22px}
+.suggest .ico{width:48px;height:48px}
+.suggest .tx{flex:1;min-width:200px}
+.suggest .tx small{display:block;font-size:12px;font-weight:750;letter-spacing:.8px;text-transform:uppercase;color:var(--pop-d)}
+.suggest .tx b{font-size:18px}
+.gcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gcard{position:relative;display:flex;flex-direction:column;gap:14px;background:#fff;border:1.5px solid var(--line);border-radius:var(--r);padding:20px;text-decoration:none;min-height:196px;transition:border-color .15s,transform .15s,box-shadow .15s}
+.gcard:hover{border-color:var(--c);transform:translateY(-3px);box-shadow:var(--shadow)}
+.gcard .top{display:flex;justify-content:space-between;align-items:flex-start}
+.gcard h3{font-size:18px;font-weight:750}
+.gcard p{color:var(--muted);font-size:14px;line-height:1.45}
+.gcard .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);font-weight:600}
+.gcard .go{color:var(--c);font-weight:750}
+.st{font-size:12px;font-weight:750;padding:4px 10px;border-radius:99px;background:#eef2f3;color:var(--muted)}
+.st.new{background:#fff0e8;color:var(--pop-d)}
+.st.done{background:#e3f4e8;color:var(--ok)}
+.sec-title{margin:30px 0 14px;font-size:13px;font-weight:750;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted)}
+
+/* ---------- tela de jogo ---------- */
+body[data-view=play] .topbar,body[data-view=play] .tabbar{display:none}
+.playbar{position:sticky;top:0;z-index:40;background:rgba(243,246,246,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.playbar-in{display:flex;align-items:center;gap:14px;height:64px;max-width:1120px;margin:auto;padding:0 24px}
+.playbar .pb-title{flex:1;min-width:0;display:flex;align-items:center;gap:10px}
+.playbar .pb-title b{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{font-size:12px;font-weight:750;padding:4px 10px;border-radius:99px;background:#e3f4e8;color:var(--ok);white-space:nowrap}
+.badge.live{background:#fff0e8;color:var(--pop-d)}
+.badge.try{background:#e8eef9;color:#2a4f94}
+.pbar{height:5px;background:#e1e9eb}
+.pbar i{display:block;height:100%;width:0;background:var(--pop);transition:width .3s}
+.play-wrap{max-width:1120px;margin:auto;padding:28px 24px 40px}
+.intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start}
+.intro-main .ico{width:60px;height:60px;border-radius:18px;margin-bottom:18px}
+.intro-main .ico svg{width:32px;height:32px}
+.intro-main h1{font-size:clamp(32px,4.8vw,48px);font-weight:850;letter-spacing:-.04em;margin:8px 0 10px}
+.intro-main .desc{color:var(--ink2);font-size:18px;max-width:520px}
+.how{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:12px;counter-reset:s}
+.how li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;font-size:16px}
+.how li::before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;margin-top:-2px}
+.keys{display:inline-flex;margin-top:20px;padding:8px 14px;border-radius:10px;background:#e8eef0;color:var(--ink2);font-size:14px;font-weight:650}
+.full-rule{margin-top:18px;font-size:14px;color:var(--muted)}
+.full-rule summary{cursor:pointer;font-weight:650;color:var(--ink2)}
+.full-rule p{margin-top:8px;line-height:1.65}
+.side-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:22px}
+.demo{border-radius:14px;background:#f4f8f8;border:1px solid var(--line);padding:22px 14px;text-align:center;display:grid;gap:12px;justify-items:center}
+.demo-cap{font-size:14px;color:var(--ink2);max-width:360px}
+.demo small.lab{font-size:11px;letter-spacing:1px;font-weight:750;text-transform:uppercase;color:var(--muted)}
+.demo .defense-arrows{font-size:34px}
+.demo .central-arrow{width:50px;height:58px}
+.demo .stim{font-size:44px}
+.demo .grid{width:170px;gap:6px}
+.demo .tile{height:46px;font-weight:800;display:grid;place-items:center}
+.shirts{display:flex;gap:10px;justify-content:center}
+.shirt{width:56px;height:56px;border-radius:14px;background:#fff;border:2px solid #c5d3d8;display:grid;place-items:center;font-size:22px;font-weight:800}
+.shirt.hl{border-color:var(--brand);background:var(--soft);color:var(--brand-d)}
+.pill{display:inline-block;padding:10px 18px;border-radius:999px;font-weight:800;font-size:18px}
+.pill.go{background:#e3f4e8;color:var(--ok)}.pill.wait{background:#f6efd6;color:var(--warn)}
+.demo-row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
+.demo .dual-task{gap:10px}.demo .task-panel{padding:12px 6px}.demo .task-panel .stim{font-size:34px;margin:6px 0}
+.demo .breath-circle{width:110px;height:110px;font-size:16px}
+.lvl-label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#e8eef0;border-radius:12px;padding:5px}
+.seg button{font:inherit;font-weight:650;min-height:42px;border:0;border-radius:9px;background:transparent;color:var(--ink2);cursor:pointer}
+.seg button[aria-checked=true]{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(13,39,51,.18)}
+.lvl-note{font-size:13px;color:var(--muted);margin-top:8px}
+.best-line{font-size:14px;color:var(--ink2);font-weight:600;display:flex;align-items:center;gap:8px}
+.best-line::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.actions{display:grid;gap:10px}
+.actions .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.no-points{font-size:14px;color:var(--ink2);background:#eaf5ee;border-radius:12px;padding:12px 14px}
+
+/* sessão */
+.run{max-width:760px;margin:0 auto}
+.run-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.run-stats div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.run-stats small{display:block;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.run-stats b{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.run-stats .pt b{color:var(--pop-d)}
+.arena{position:relative;overflow:hidden;min-height:360px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;border-radius:20px;background:#fff;border:2px solid var(--line);padding:34px 16px 28px;text-align:center;transition:border-color .15s,background .15s}
+.arena.ok{border-color:var(--ok);background:#f2faf4}
+.arena.bad{border-color:var(--bad);background:#fdf3f3}
+.tbar{position:absolute;left:0;right:0;top:0;height:6px;background:#eef2f3}
+.tbar i{display:block;height:100%;width:100%;background:var(--pop)}
+.countdown{font-size:120px;font-weight:850;letter-spacing:-.05em;color:var(--pop-d);line-height:1}
+.countdown.pop{animation:pop .6s ease-out}
+@keyframes pop{from{transform:scale(1.5);opacity:0}to{transform:scale(1);opacity:1}}
+#feedback{min-height:52px;margin-top:14px;padding:12px 16px;border-radius:12px;font-size:15px;font-weight:600;background:#eef2f3;color:var(--ink2);display:flex;align-items:center}
+#feedback.ok{background:#e3f4e8;color:#0f5f2c}
+#feedback.bad{background:#fbe5e5;color:#8f2525}
+.stim{font-size:clamp(40px,8vw,68px);font-weight:800}
+.choices{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.choices .btn{min-height:56px;min-width:130px;font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:min(100%,320px)}
+.tile{height:78px;background:#e3ecee;border:1.5px solid #d3e0e3;border-radius:12px;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.tile.lit{background:var(--brand);color:#fff;border-color:var(--brand)}
+.number-board{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:650px}
+.number-board .btn{min-width:66px;min-height:66px;font-size:24px;font-weight:700;padding:0}
+.number-board .done{visibility:hidden}
+.word-row{display:flex;gap:5px;justify-content:center;margin:6px 0}
+.letter{display:grid;place-items:center;width:clamp(26px,7vw,42px);height:46px;border-radius:8px;font-size:21px;font-weight:700;color:#fff}
+.exact{background:#1f7a46}.present{background:#8d6c25}.absent{background:#687985}
+.word-input{font:inherit;border:1.5px solid #c5d3d8;border-radius:12px;padding:0 14px;min-height:56px;text-transform:uppercase;letter-spacing:4px;max-width:100%;text-align:center;font-weight:700;font-size:20px}
+.word-log{max-height:300px;overflow:auto}
+.notice{font-size:12px;color:var(--muted);line-height:1.7}
+.defense-arrows{display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,20px);font-size:clamp(32px,7vw,64px);font-weight:700;line-height:1}
+.central-arrow{display:grid;place-items:center;width:clamp(48px,12vw,82px);height:clamp(58px,15vw,90px);border:3px solid var(--brand);border-radius:12px;background:#fff;color:var(--ink)}
+.flank-arrow{color:#768d99}
+.search-board{display:grid;gap:8px;width:min(100%,440px)}
+.search-board .btn{font-weight:700;font-size:23px;padding:12px 5px;min-height:56px}
+.rule-banner{padding:11px 22px;border-radius:999px;background:var(--ink);color:#fff;font-size:16px;font-weight:750;letter-spacing:.3px}
+.dual-task{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:680px}
+.task-panel{padding:18px 10px;background:#f6f9fa;border:1px solid var(--line);border-radius:14px}
+.task-panel .stim{margin:15px 0}
+.task-panel small{font-weight:750;text-transform:uppercase;letter-spacing:.8px;font-size:11px;color:var(--muted)}
+.dual-task .choices .btn{font-size:14px;padding:0 10px;min-width:0;min-height:48px}
+.breath-circle{display:grid;place-items:center;width:170px;height:170px;border-radius:50%;background:var(--soft);border:2px solid #bfd7d1;color:var(--brand-d);font-size:44px;font-weight:800}
+
+/* resultado */
+.res{max-width:760px;margin:0 auto;display:grid;gap:16px}
+.res-head .badge{display:inline-block;margin-bottom:10px}
+.res-head h2{font-size:clamp(28px,4vw,38px);font-weight:850;letter-spacing:-.03em}
+.score-card{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:var(--ink);color:#fff;border-radius:22px;padding:28px 30px}
+.score small{display:block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#a8c5cf;font-weight:700}
+.score b{display:block;font-size:84px;font-weight:850;letter-spacing:-.05em;line-height:1;color:#ffb089;margin:6px 0 10px}
+.rec{display:inline-block;font-size:13px;font-weight:700;padding:5px 12px;border-radius:99px;background:rgba(255,255,255,.14)}
+.rec.new{background:var(--gold);color:#3a2b00}
+.res-stats{margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.res-stats dt{font-size:12px;color:#a8c5cf;font-weight:650}
+.res-stats dd{margin:2px 0 0;font-size:26px;font-weight:800}
+.standing{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.standing div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13px;color:var(--muted);font-weight:650}
+.standing b{display:block;font-size:22px;color:var(--ink);font-weight:800;margin-top:2px}
+.extra{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:14px;color:var(--ink2)}
+.next-card{display:flex;align-items:center;gap:14px;background:#fff4ee;border:1.5px solid #ffc9b0;border-radius:16px;padding:14px 18px}
+.next-card .tx{flex:1}
+.next-card small{display:block;font-size:11px;letter-spacing:.8px;font-weight:750;text-transform:uppercase;color:var(--pop-d)}
+.res-actions{display:grid;gap:10px}
+.res-actions .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.reflect{background:var(--soft);border-radius:14px;padding:16px 18px;font-size:15px;color:var(--ink2)}
+.reflect b{display:block;color:var(--brand-d);font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+
+/* ---------- equipe ---------- */
+.sum3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.sum3 div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.sum3 small{display:block;font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.sum3 b{font-size:30px;font-weight:850;letter-spacing:-.03em}
+.me-card{background:var(--ink);color:#fff;border-radius:var(--r);padding:20px 24px;display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+.me-card .who{flex:1;min-width:180px}
+.me-card .who small{color:#a8c5cf;font-size:12px;letter-spacing:.8px;text-transform:uppercase;font-weight:700}
+.me-card .who b{display:block;font-size:22px}
+.me-card .mc small{display:block;color:#a8c5cf;font-size:12px;font-weight:650}
+.me-card .mc b{font-size:24px;font-weight:800}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;margin-bottom:18px}
+.panel h2{font-size:22px;font-weight:800;margin-bottom:6px}
+.empty{padding:34px 16px;text-align:center;color:var(--muted);display:grid;gap:14px;justify-items:center}
+.lb{border-top:1px solid var(--line)}
+.lb:first-of-type{border-top:0}
+.lb summary{list-style:none;display:grid;grid-template-columns:40px minmax(0,1.2fr) minmax(0,1fr) 64px 84px;gap:14px;align-items:center;padding:14px 4px;cursor:pointer}
+.lb summary::-webkit-details-marker{display:none}
+.lb.me{background:#fff9f5}
+.pl{width:34px;height:34px;border-radius:50%;background:#e8eef0;display:grid;place-items:center;font-weight:800;font-size:14px}
+.pl1{background:var(--gold);color:#3a2b00}.pl2{background:#cfd8dc}.pl3{background:#e0b48f}
+.lb-name{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-name em{font-style:normal;font-size:11px;font-weight:750;background:#fff0e8;color:var(--pop-d);padding:2px 8px;border-radius:99px;margin-left:6px}
+.lb-bar{height:8px;border-radius:99px;background:#e4ecee;overflow:hidden}
+.lb-bar i{display:block;height:100%;background:var(--brand);border-radius:99px}
+.lb-pts{font-size:20px;text-align:right;font-weight:800}
+.lb-ses{font-size:12px;color:var(--muted);text-align:right}
+.lb-det{display:flex;flex-wrap:wrap;gap:8px;padding:2px 4px 16px 54px}
+.lb-det span{font-size:13px;background:#f1f5f6;border-radius:8px;padding:6px 10px;color:var(--muted)}
+.lb-det b{color:var(--ink);margin-left:4px}
+.tabs{display:inline-flex;gap:4px;background:#e8eef0;border-radius:10px;padding:4px;margin:12px 0}
+.tabs button{font:inherit;font-weight:650;font-size:14px;border:0;background:transparent;border-radius:7px;padding:7px 14px;cursor:pointer;color:var(--ink2)}
+.tabs button[aria-pressed=true]{background:#fff;box-shadow:0 1px 3px rgba(13,39,51,.18)}
+.hrow{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.hrow:first-child{border-top:0}
+.hrow b{font-size:15px}
+.hrow small{display:block;color:var(--muted);font-size:13px}
+.hrow .r{text-align:right;white-space:nowrap}
+.hrow .r b{color:var(--pop-d);font-size:17px}
+.data-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+/* ---------- sobre ---------- */
+.prose{max-width:720px}
+.prose p{color:var(--ink2);line-height:1.75;margin-bottom:14px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 6px}
+.facts div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.facts strong{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em}
+.facts small{color:var(--muted);font-size:13px}
+.steps4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.steps4 article{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.steps4 small{color:var(--brand);font-weight:750;font-size:11px;letter-spacing:1.2px}
+.steps4 h3{margin:10px 0 6px;font-size:19px}
+.steps4 p{color:var(--muted);font-size:15px}
+.skill-tags{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px}
+.skill-tags span{padding:8px 14px;background:var(--soft);border-radius:99px;font-size:13px;font-weight:650;color:var(--brand-d)}
+.about details{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin-bottom:12px}
+.about summary{cursor:pointer;font-weight:700}
+.about details p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:10px}
+
+/* ---------- onboarding ---------- */
+.overlay{position:fixed;inset:0;z-index:300;background:rgba(13,39,51,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px;overflow:auto}
+.ob{width:min(520px,100%);background:#fff;border-radius:24px;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.35);display:grid;gap:20px;position:relative}
+.ob .x{position:absolute;right:14px;top:14px;width:40px;height:40px;border:0;background:transparent;border-radius:50%;cursor:pointer;font-size:22px;color:var(--muted)}
+.ob .x:hover{background:var(--soft)}
+.dots{display:flex;gap:6px}
+.dots i{width:28px;height:5px;border-radius:9px;background:#dfe8ea}
+.dots i.on{background:var(--pop)}
+.ob h2{font-size:30px;font-weight:850;letter-spacing:-.03em}
+.ob p{color:var(--muted)}
+.ob-list{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.ob-list li{display:flex;gap:14px;align-items:center;font-weight:600}
+.ob-list .ico{--c:var(--brand);width:42px;height:42px}
+.field{display:grid;gap:8px;font-weight:650;font-size:14px;color:var(--ink2)}
+.field input{font:inherit;font-size:18px;min-height:54px;border:1.5px solid #c5d3d8;border-radius:12px;padding:0 16px;color:var(--ink)}
+.field input:focus{border-color:var(--brand)}
+.err{color:var(--bad);font-size:14px;font-weight:600;min-height:20px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button{font:inherit;font-weight:650;font-size:14px;border:1.5px solid #c5d3d8;background:#fff;border-radius:99px;padding:7px 14px;cursor:pointer}
+.chips button:hover{border-color:var(--ink)}
+.lvls{display:grid;gap:10px}
+.lvl{display:flex;gap:14px;align-items:flex-start;text-align:left;font:inherit;border:2px solid var(--line);background:#fff;border-radius:14px;padding:14px 16px;cursor:pointer;width:100%}
+.lvl[aria-checked=true]{border-color:var(--brand);background:var(--soft)}
+.lvl .radio{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid #b5c6cc;margin-top:2px}
+.lvl[aria-checked=true] .radio{border:7px solid var(--brand)}
+.lvl b{display:block;font-size:16px}
+.lvl small{color:var(--muted);font-size:13px;line-height:1.4}
+.ob-actions{display:flex;gap:10px;justify-content:space-between}
+.ob-actions .btn-go{flex:1}
+
+/* ---------- rodapé e abas mobile ---------- */
+.foot-note{max-width:760px;margin:40px auto 24px;padding:0 24px;color:var(--muted);font-size:12px;line-height:1.7;text-align:center}
+.tabbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.tabbar a{flex:1;display:grid;justify-items:center;gap:2px;text-decoration:none;color:var(--muted);font-size:11px;font-weight:700;padding:6px 0;border-radius:12px}
+.tabbar svg{width:24px;height:24px}
+.tabbar a[aria-current=page]{color:var(--pop-d)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:28px;padding-top:36px}
+  .hero-card{min-height:300px}
+  .gcards{grid-template-columns:repeat(2,1fr)}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .intro-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .nav{display:none}
+  .tabbar{display:flex}
+  body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+  body[data-view=play]{padding-bottom:0}
+  .topbar-in{height:60px}
+  .brand small{display:none}
+  .steps3,.facts,.sum3{grid-template-columns:1fr}.standing{gap:8px}.standing div{padding:12px;font-size:12px}.standing b{font-size:17px}
+  .steps4{grid-template-columns:1fr}
+  .cta-band{padding:28px 22px}
+  .score-card{grid-template-columns:1fr;gap:20px}
+  .res-actions .row3{grid-template-columns:1fr}
+  .lb summary{grid-template-columns:34px minmax(0,1fr) 56px;gap:10px}
+  .lb-bar,.lb-ses{display:none}
+  .lb-det{padding-left:4px}
+  .intro-actions{position:sticky;bottom:0;background:linear-gradient(transparent,var(--bg) 24%);padding:20px 0 calc(14px + env(safe-area-inset-bottom));margin:0 -4px}
+}
+@media(max-width:560px){
+  .wrap,.play-wrap,.playbar-in{padding-left:16px;padding-right:16px}
+  .gcards{grid-template-columns:1fr}
+  .gcard{min-height:0;flex-direction:row;flex-wrap:wrap;gap:10px}
+  .gcard .top{width:100%}
+  .tiles{grid-template-columns:1fr}
+  .hero h1{font-size:clamp(44px,15vw,64px)}
+  .hero-card{padding:24px;min-height:260px}
+  .hero-card .big{font-size:72px}
+  .cta-row .btn{flex:1}
+  .run-stats{grid-template-columns:repeat(2,1fr)}
+  .arena{min-height:320px;padding:30px 10px 22px}
+  .letter{height:38px;font-size:18px}
+  .search-board .btn{min-height:48px;font-size:19px}
+  .dual-task{gap:8px}.task-panel{padding:12px 5px}.dual-task .choices{flex-direction:column}
+  .chip .tx b{max-width:84px}
+  .ob{padding:24px 20px}
+  .score b{font-size:68px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-view="home">
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<header class="topbar" id="topbar"><div class="wrap topbar-in">
+  <a class="brand" href="#/" aria-label="NEAR LAB — início">
+    <svg class="logo" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="10" fill="#0d2733"/><circle cx="18" cy="18" r="10" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="18" cy="18" r="4.6" fill="#ff5a1f"/></svg>
+    <span><b>NEAR LAB</b><small>Psicologia do esporte</small></span>
+  </a>
+  <nav class="nav" aria-label="Principal">
+    <a href="#/" data-nav="home">Início</a>
+    <a href="#/jogos" data-nav="games">Jogos</a>
+    <a href="#/equipe" data-nav="team">Equipe</a>
+    <a href="#/sobre" data-nav="about">Sobre</a>
+  </nav>
+  <button class="chip" id="chip" type="button"></button>
+</div></header>
+
+<noscript><p style="padding:24px">Para abrir as atividades, acesse esta página publicada pelo Chrome ou Safari com JavaScript ativado.</p></noscript>
+
+<main id="main">
+
+<!-- INÍCIO -->
+<section class="view" id="view-home" aria-labelledby="homeTitle"><div class="wrap">
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Psicologia do esporte · Jornada 2028</span>
+      <h1 id="homeTitle" tabindex="-1">Olimpíada <span>Cognitiva.</span></h1>
+      <p class="lead">Desafios rápidos de atenção, memória e tomada de decisão para atletas treinarem a mente e aprenderem como ela funciona.</p>
+      <div class="cta-row">
+        <a class="btn btn-go btn-lg" id="homeCta" href="#/jogos">Começar a jogar →</a>
+        <a class="btn btn-lg" href="#/sobre">Conhecer o projeto</a>
+      </div>
+      <div class="hero-facts"><span>11 atividades</span><span>Cerca de 1 minuto cada</span><span>Celular ou computador</span></div>
+    </div>
+    <div class="hero-card" aria-hidden="true">
+      <svg class="track" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="rgba(255,255,255,.1)" stroke-width="2"><rect x="-60" y="40" width="520" height="320" rx="160"/><rect x="-38" y="62" width="476" height="276" rx="138"/><rect x="-16" y="84" width="432" height="232" rx="116"/><rect x="6" y="106" width="388" height="188" rx="94"/></g></svg>
+      <div class="in">
+        <div class="big">10</div>
+        <div class="big-l">desafios cognitivos</div>
+        <div class="plus">+ 1 prática guiada de atenção plena</div>
+        <div class="mini-icons" id="heroIcons"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="eyebrow">Como funciona</span>
+    <h2>Três passos. Sem complicação.</h2>
+    <div class="steps3">
+      <div class="step3"><div class="n">1</div><h3>Jogue</h3><p>Escolha um desafio, leia a regra, faça um treino e comece. Cada sessão leva cerca de 1 minuto.</p></div>
+      <div class="step3"><div class="n">2</div><h3>Some pontos</h3><p>Cada sessão vale de 0 a 100 pontos, conforme a porcentagem de acertos.</p></div>
+      <div class="step3"><div class="n">3</div><h3>Acompanhe a equipe</h3><p>Veja o placar, compare sessões e converse sobre as estratégias que funcionaram.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="eyebrow">Os desafios</span>
+    <h2>Cada um pede uma forma de prestar atenção.</h2>
+    <div class="tiles" id="homeTiles"></div>
+  </div>
+
+  <div class="cta-band">
+    <div><h2>Pronto para o primeiro desafio?</h2><p>Leva menos de dois minutos para começar.</p></div>
+    <a class="btn btn-go btn-lg" id="homeCta2" href="#/jogos">Começar a jogar →</a>
+  </div>
+</div></section>
+
+<!-- JOGOS -->
+<section class="view" id="view-games" hidden aria-labelledby="gamesTitle"><div class="wrap">
+  <div class="page-head">
+    <span class="eyebrow" id="gmHello">Jogos</span>
+    <h1 id="gamesTitle" tabindex="-1">Escolha um desafio.</h1>
+    <p>Cada sessão vale até 100 pontos. Você pode treinar sem pontuar antes de começar valendo.</p>
+  </div>
+  <div id="gmProgress"></div>
+  <div id="gmSuggest"></div>
+  <div class="gcards" id="gmCards"></div>
+  <div class="sec-title">Pausa guiada</div>
+  <div class="gcards" id="gmMind"></div>
+</div></section>
+
+<!-- JOGAR -->
+<section class="view" id="view-play" hidden aria-labelledby="inName">
+  <div class="playbar">
+    <div class="playbar-in">
+      <button class="btn btn-ghost btn-sm" id="backBtn" type="button">← Jogos</button>
+      <div class="pb-title"><b id="pTitle"></b><span class="badge" id="pBadge" hidden></span></div>
+    </div>
+    <div class="pbar" id="pbarWrap" hidden><i id="pBar"></i></div>
+  </div>
+  <div class="play-wrap">
+
+    <div id="introBox">
+      <div class="intro-grid">
+        <div class="intro-main">
+          <div class="ico" id="inIcon"></div>
+          <span class="eyebrow" id="inCat"></span>
+          <h1 id="inName" tabindex="-1"></h1>
+          <p class="desc" id="inDesc"></p>
+          <ol class="how" id="inSteps"></ol>
+          <span class="keys" id="inKeys"></span>
+          <details class="full-rule"><summary>Ver regra completa</summary><p id="inRule"></p></details>
+        </div>
+        <div class="side-card">
+          <div class="demo" id="inDemo"></div>
+          <div id="inLevelBox">
+            <div class="lvl-label">Dificuldade</div>
+            <div class="seg" id="inSeg" role="radiogroup" aria-label="Dificuldade">
+              <button type="button" role="radio" data-level="1">Inicial</button>
+              <button type="button" role="radio" data-level="2">Intermediário</button>
+              <button type="button" role="radio" data-level="3">Avançado</button>
+            </div>
+            <p class="lvl-note" id="inLvlNote"></p>
+          </div>
+          <p class="best-line" id="inBest"></p>
+          <p class="no-points" id="inNoPoints" hidden>Esta prática não gera pontos nem classificação. Pode encerrar quando quiser.</p>
+          <div class="actions intro-actions">
+            <button class="btn btn-go btn-lg" id="btnReal" type="button">Começar valendo pontos</button>
+            <button class="btn" id="btnPractice" type="button">Treinar antes (não pontua)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="runBox" hidden>
+      <div class="run">
+        <div class="run-stats">
+          <div><small>Etapa</small><b id="stRound">—</b></div>
+          <div><small>Acertos</small><b id="stHits">0</b></div>
+          <div><small>Erros</small><b id="stErrors">0</b></div>
+          <div class="pt"><small>Pontos</small><b id="stPoints">—</b></div>
+        </div>
+        <div class="arena" id="arena"></div>
+        <div id="feedback" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div id="resultBox" hidden></div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section class="view" id="view-team" hidden aria-labelledby="teamTitle"><div class="wrap">
+  <div class="page-head">
+    <span class="eyebrow">Placar recreativo</span>
+    <h1 id="teamTitle" tabindex="-1">Equipe.</h1>
+    <p>Pontos acumulados por participante neste aparelho. Sem classificação de capacidade cognitiva.</p>
+  </div>
+  <div id="tmSummary"></div>
+  <div class="panel">
+    <h2>Placar</h2>
+    <p class="muted" style="font-size:14px">Toque em um participante para ver os pontos por jogo.</p>
+    <div id="tmBoard"></div>
+  </div>
+  <div class="panel">
+    <h2>Histórico de sessões</h2>
+    <div class="tabs" role="group" aria-label="Filtrar histórico"><button type="button" data-f="all" aria-pressed="true">Todas</button><button type="button" data-f="mine" aria-pressed="false">Minhas</button></div>
+    <div id="tmHistory"></div>
+  </div>
+  <div class="panel">
+    <h2>Dados</h2>
+    <p class="notice" style="font-size:13px">Os resultados ficam salvos apenas neste navegador, sem conta e sem envio a servidor. Para a competição, combine o mesmo nível e a mesma quantidade de sessões por jogo: quem joga mais sessões acumula mais pontos.</p>
+    <p class="notice" id="storage" style="color:var(--bad)"></p>
+    <div class="data-actions"><button class="btn" id="export" type="button">Exportar CSV</button><button class="btn" id="clear" type="button">Zerar gincana</button></div>
+  </div>
+</div></section>
+
+<!-- SOBRE -->
+<section class="view about" id="view-about" hidden aria-labelledby="aboutTitle"><div class="wrap">
+  <div class="page-head">
+    <span class="eyebrow">Sobre o projeto</span>
+    <h1 id="aboutTitle" tabindex="-1">Modalidades diferentes. Uma jornada em equipe.</h1>
+  </div>
+
+  <div class="prose">
+    <p>A Olimpíada Cognitiva propõe reunir de 100 a 200 participantes em equipes de dez atletas, organizadas por modalidade. Cada equipe percorre um circuito de desafios cognitivos e momentos de reflexão, com acompanhamento da psicologia do esporte, entre 2026 e 2028.</p>
+    <p>Mais do que um placar, é um convite para conversar sobre como cada atleta se prepara, responde e lida com o erro. Os desafios trabalham atenção, memória e escolha de respostas para que os atletas explorem estratégias, reconheçam distrações e aprendam com cada tentativa.</p>
+  </div>
+  <div class="facts">
+    <div><strong>10 atletas</strong><small>por equipe, na proposta do projeto</small></div>
+    <div><strong>10 a 20 equipes</strong><small>para um grupo de 100 a 200 atletas</small></div>
+    <div><strong>11 atividades</strong><small>já disponíveis para experimentar</small></div>
+  </div>
+
+  <div class="section">
+    <span class="eyebrow">Como funciona</span>
+    <h2>Um circuito com espaço para aprender.</h2>
+    <div class="steps4">
+      <article><small>01 · CONHECER</small><h3>Familiarização</h3><p>Experimentar as atividades, entender as regras e descobrir estratégias antes dos desafios oficiais.</p></article>
+      <article><small>02 · PRATICAR</small><h3>Desafios semanais</h3><p>Duas ou três atividades por semana, com condições e quantidade de tentativas combinadas para todos.</p></article>
+      <article><small>03 · COMPARTILHAR</small><h3>Encontros da equipe</h3><p>Conversar sobre distrações, impulsos, decisões e formas de retomar o foco após um erro.</p></article>
+      <article><small>04 · CELEBRAR</small><h3>Festival final</h3><p>Reunir as modalidades em um circuito presencial, valorizando participação, colaboração e aprendizado.</p></article>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="eyebrow">Habilidades em prática</span>
+    <h2>O que cada desafio pede.</h2>
+    <div class="skill-tags"><span>Atenção seletiva</span><span>Atenção dividida</span><span>Memória visuoespacial</span><span>Controle de impulsos</span><span>Controle de interferência</span><span>Tomada de decisão e ordenação</span><span>Raciocínio verbal</span><span>Percepção visual</span><span>Flexibilidade cognitiva</span><span>Tempo de reação</span><span>Atenção plena</span></div>
+    <p class="notice" style="font-size:13px;max-width:720px">Essas expressões descrevem as demandas das tarefas. O desempenho nos jogos não constitui avaliação psicológica nem comprova transferência para o desempenho esportivo.</p>
+  </div>
+
+  <div class="section">
+    <span class="eyebrow">Pontuação</span>
+    <h2>Como os pontos funcionam.</h2>
+    <div class="prose">
+      <p>Cada sessão concluída vale de 0 a 100 pontos, conforme a porcentagem de acertos. Os pontos se somam por jogo e no total geral. Treinos e sessões interrompidas não pontuam. Atenção plena é uma prática guiada, sem pontuação e sem competição.</p>
+      <p>Esta versão permite jogar, registrar sessões e acompanhar pontos no mesmo navegador. A organização de equipes, o controle de tentativas oficiais e o ranking entre aparelhos fazem parte da próxima etapa do projeto.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="eyebrow">Para organizadores</span>
+    <h2>Implantação e publicação.</h2>
+    <details open><summary>Sugestão de implantação</summary><p>Piloto de quatro semanas com duas modalidades e vinte atletas. Na etapa oficial, separar treino livre de tentativas válidas e adotar regras iguais para todos. Sugestão de uso: uma sessão breve, com pausa entre atividades. Ao final, converse sobre a estratégia utilizada e sobre como lidar com o erro. Para comparar sessões, mantenha as mesmas condições e o mesmo nível de dificuldade.</p></details>
+    <details><summary>Publicar no GitHub Pages</summary><p>Envie este arquivo como <b>index.html</b> na raiz do repositório. Em Settings → Pages, escolha Deploy from a branch, a branch principal e a pasta / (root). O endereço será exibido pelo GitHub após a publicação.</p></details>
+    <details><summary>Como o tempo é medido</summary><p>Tempo médio das respostas corretas que exigem ação, medido no navegador e exibido em segundos (ex.: 0,25 s). Tempo de reação também registra antecipações, melhor tempo e mediana da sessão; a exportação inclui os tempos individuais. A pontuação usa acertos, sem bônus por velocidade. Na memória e no jogo de palavras, o tempo não é calculado. Em Tomada de decisão e ordenação, é o tempo total médio por sequência correta; em Atenção dividida, é o tempo total para responder corretamente às duas tarefas; nos demais, o tempo por resposta correta com ação. A precisão de Tomada de decisão e ordenação e Raciocínio verbal é por rodada completa. O nível altera a quantidade inicial e o tempo em Tomada de decisão e ordenação; Raciocínio verbal mantém as mesmas regras nos três níveis. Tela, toque, teclado e desempenho do aparelho interferem na medida.</p></details>
+    <details><summary>Aviso importante</summary><p>Atividades lúdicas de prática cognitiva, sem normas ou classificação clínica. Não constituem teste psicológico validado. Os resultados descrevem apenas a execução nesta tarefa; não demonstram, por si, melhora cognitiva geral ou transferência para o esporte. Para crianças, utilize com acompanhamento de adulto. Não registre dados sensíveis em aparelhos compartilhados.</p></details>
+  </div>
+</div></section>
+
+</main>
+
+<p class="foot-note" id="footNote">Atividades lúdicas de prática cognitiva. Não constituem teste psicológico nem avaliação clínica. Detalhes em <a href="#/sobre">Sobre</a>.</p>
+
+<nav class="tabbar" id="tabbar" aria-label="Principal">
+  <a href="#/" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Início</a>
+  <a href="#/jogos" data-nav="games"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Jogos</a>
+  <a href="#/equipe" data-nav="team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.7 0 4.5 1.8 4.5 4.5"/></svg>Equipe</a>
+  <a href="#/sobre" data-nav="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".6" fill="currentColor"/></svg>Sobre</a>
+</nav>
+
+<div class="overlay" id="onboard" hidden role="dialog" aria-modal="true" aria-labelledby="obTitle"><div class="ob" id="obBox"></div></div>
+
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+function button(text,fn,cls){const b=document.createElement('button');b.type='button';b.className=cls||'btn';b.textContent=text;b.onclick=fn;return b}
+const svg=p=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';
+const LEVELS=['Inicial','Intermediário','Avançado'];
+const LEVEL_TEXT=[
+  ['Inicial','Mais tempo para responder e estímulos mais simples. Ideal para conhecer o jogo.'],
+  ['Intermediário','Ritmo moderado, com mais distrações e menos tempo.'],
+  ['Avançado','Menos tempo e mais estímulos. Para quem já domina as regras.']
+];
+
+/* ---------- dados dos jogos ---------- */
+const games=[
+{id:0,name:'Atenção seletiva',cat:'Atenção',c:'#0b7a6c',time:'≈ 1 min',unit:'etapas',desc:'Selecionar o estímulo central e ignorar distrações.',
+ steps:['Olhe a seta do meio. Ela é a única que vale.','Toque na direção dela (← ou →). Ignore as quatro setas laterais.','Se o centro estiver vazio, não toque e espere a próxima rodada.'],
+ keys:'Teclado: ← → · Toque: botões',
+ rule:'Use ← ou → no teclado, ou os botões. Vale apenas a seta do meio, dentro do quadro. Ignore as quatro setas laterais. Se o quadro central estiver vazio, não clique até a próxima rodada. Inicial: laterais ajudam; intermediário e avançado: laterais podem confundir. O tempo diminui conforme o nível.',
+ icon:svg('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>')},
+{id:1,name:'Controle de impulsos',cat:'Inibição',c:'#b86a1a',time:'≈ 1 min',unit:'etapas',desc:'Responder ao sinal correto e inibir respostas inadequadas.',
+ steps:['Quando aparecer LARGADA, toque o mais rápido que puder.','Quando aparecer AGUARDE, não faça nada.','Cada sinal tem tempo limite: a barra no topo mostra quanto resta.'],
+ keys:'Espaço ou botão',
+ rule:'Aperte espaço ou TOCAR quando aparecer LARGADA. Se aparecer AGUARDE, não faça nada até o próximo estímulo.',
+ icon:svg('<path d="M6 21V4"/><path d="M6 4h11l-2.5 4L17 12H6"/>')},
+{id:2,name:'Memória visuoespacial',cat:'Memória',c:'#2b6cb0',time:'≈ 2 min',unit:'rodadas',desc:'Reter e reproduzir uma sequência de posições.',
+ steps:['Os quadrados são setores de uma quadra. Observe a ordem em que acendem.','Quando aparecer “Sua vez”, toque nos setores na mesma ordem.','A cada rodada a sequência cresce. Um erro encerra a rodada.'],
+ keys:'Toque nos quadrados',
+ rule:'Os quadrados representam setores de uma quadra. Observe a ordem dos setores iluminados. Quando aparecer “Sua vez”, repita a sequência tocando nos quadrados.',
+ icon:svg('<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="currentColor"/>')},
+{id:3,name:'Controle de interferência',cat:'Atenção seletiva',c:'#8a4fb8',time:'≈ 1 min',unit:'etapas',desc:'Identificar a cor das letras apesar da palavra conflitante.',
+ steps:['Uma palavra de cor aparece escrita em outra cor.','Escolha a COR DAS LETRAS, não o que a palavra diz.','Exemplo: a palavra AZUL escrita em vermelho → responda VERMELHO.'],
+ keys:'Teclas 1 a 4 ou botões',
+ rule:'Selecione a COR DAS LETRAS. Ignore o significado da palavra. Use os botões ou as teclas 1, 2, 3 e 4.',
+ icon:svg('<circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>')},
+{id:4,name:'Tomada de decisão e ordenação',cat:'Ordenação',c:'#5a54c4',time:'≈ 2 min',unit:'rodadas',desc:'Escolher a próxima resposta e ordenar números pela regra.',
+ steps:['Os números são camisas de atletas, fora de ordem.','Toque nelas em ordem crescente ou decrescente, conforme o aviso.','A quantidade aumenta a cada rodada. Um toque errado encerra a rodada.'],
+ keys:'Toque nas camisas',
+ rule:'Os números representam camisas de atletas. Toque neles em ordem crescente ou decrescente, conforme a regra da rodada. As posições mudam e a quantidade aumenta a cada rodada. Um toque errado encerra a rodada.',
+ icon:svg('<path d="M5 19v-6M12 19V8M19 19V4"/><path d="M3 21h18"/>')},
+{id:5,name:'Raciocínio verbal',cat:'Linguagem',c:'#a8438f',time:'≈ 3 min',unit:'palavras',desc:'Usar pistas e letras para descobrir um objeto esportivo.',
+ steps:['Você recebe a modalidade como pista e o número de letras.','Digite o objeto esportivo. São 6 tentativas por palavra.','Verde: posição certa · Amarelo: outra posição · Cinza: ausente.'],
+ keys:'Teclado ou toque · Dica e Pular disponíveis',
+ rule:'A modalidade aparece como pista. Descubra o objeto esportivo secreto com a quantidade indicada de letras. Digite a resposta; acentos são aceitos. Você tem seis tentativas por palavra. Se não souber, use Pular palavra: a resposta aparece e a rodada termina sem acerto. Palavras puladas contam como rodadas sem pontuação. Verde: letra na posição certa; amarelo: letra em outra posição; cinza: letra ausente. Letras repetidas são marcadas apenas até a quantidade existente na palavra. A proximidade indicada é pelas letras. Use Pedir dica para receber uma pista do significado, sem gastar tentativa.',
+ icon:svg('<rect x="3" y="7" width="4.5" height="10" rx="1"/><rect x="9.75" y="7" width="4.5" height="10" rx="1"/><rect x="16.5" y="7" width="4.5" height="10" rx="1"/>')},
+{id:6,name:'Tempo de reação',cat:'Reação simples',c:'#d9480f',time:'≈ 1 min',unit:'etapas',desc:'Responder a um sinal após uma espera imprevisível.',
+ steps:['Aguarde o sinal. A espera varia de 1,5 a 4 segundos.','Quando aparecer JÁ!, reaja o mais rápido possível.','Reagir antes do sinal conta como erro.'],
+ keys:'Espaço ou botão REAGIR',
+ rule:'Clique no botão REAGIR ou aperte espaço somente quando aparecer JÁ. A espera varia aleatoriamente de 1,5 a 4 segundos. Antecipar conta como erro. São 12 rodadas; o tempo é medido apenas nas respostas corretas.',
+ icon:svg('<path d="M13 2L5 14h6l-1 8 8-12h-6z"/>')},
+{id:7,name:'Percepção visual',cat:'Busca visual',c:'#1c7ea8',time:'≈ 1 min',unit:'etapas',desc:'Distinguir um alvo entre estímulos semelhantes.',
+ steps:['Leia o número-alvo no topo.','Encontre e toque a camisa com esse número.','Nos níveis mais altos há mais camisas e menos tempo.'],
+ keys:'Toque nas camisas',
+ rule:'Leia o número-alvo e toque na camisa correspondente. Cada rodada tem um único alvo. O nível aumenta o número de camisas e reduz o tempo disponível.',
+ icon:svg('<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/>')},
+{id:8,name:'Flexibilidade cognitiva',cat:'Troca de regra',c:'#b13c50',time:'≈ 1 min',unit:'etapas',desc:'Alternar entre regras de resposta e ajustar a escolha.',
+ steps:['Leia o comando da rodada: SIGA ou INVERTA.','SIGA: toque no lado da seta. INVERTA: toque no lado oposto.','No Inicial o comando muda em blocos; nos outros, pode mudar a cada rodada.'],
+ keys:'Teclado: ← → · Toque: botões',
+ rule:'Leia o comando de cada rodada. SIGA: responda ao lado da seta. INVERTA: responda ao lado oposto. Use as setas do teclado ou os botões. No inicial, o comando muda em blocos; nos demais, pode mudar a cada rodada.',
+ icon:svg('<path d="M4 8h14l-3-3M20 16H6l3 3"/>')},
+{id:9,name:'Atenção dividida',cat:'Duas tarefas',c:'#3d7a2a',time:'≈ 1 min',unit:'etapas',desc:'Acompanhar dois estímulos simultâneos e responder a cada um.',
+ steps:['Duas tarefas aparecem ao mesmo tempo.','Esquerda: direção da seta. Direita: número par ou ímpar.','A rodada só pontua se as duas respostas estiverem certas dentro do tempo.'],
+ keys:'Toque nos botões',
+ rule:'Responda às duas tarefas da rodada: à esquerda, escolha a direção da seta; à direita, diga se o número é par ou ímpar. A rodada só pontua se ambas estiverem corretas dentro do tempo. Use os botões.',
+ icon:svg('<rect x="3" y="5" width="8" height="14" rx="2"/><rect x="13" y="5" width="8" height="14" rx="2"/>')},
+{id:10,name:'Atenção plena',cat:'Prática guiada',c:'#2f8f6a',time:'1 min',unit:'',competitive:false,desc:'Observar a respiração e retornar a atenção ao presente.',
+ steps:['Respire naturalmente, sem forçar nem prender o ar.','Observe as sensações. Ao perceber uma distração, volte à respiração.','Dura 1 minuto, sem pontos nem competição. Você pode encerrar quando quiser.'],
+ keys:'Nenhum controle necessário',
+ rule:'Prática de um minuto, sem competição. Respire naturalmente, sem forçar ou prender o ar. Observe as sensações; quando perceber uma distração, volte à respiração. Você pode encerrar quando quiser. Não há pontos ou medida de desempenho nesta prática.',
+ icon:svg('<path d="M3 15c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/><path d="M3 20c3 0 3-3 6-3s3 3 6 3 3-3 6-3"/><circle cx="12" cy="6" r="2.5"/>')}
+];
+const RT=[12,12,5,12,8,3,12,12,12,12,1];   // etapas valendo
+const PR=[3,4,2,3,2,1,3,2,4,2,0];          // etapas de treino
+const COMP_COUNT=games.filter(g=>g.competitive!==false).length;
+const colors=[['AZUL','#245f9e'],['VERMELHO','#b13c50'],['VERDE','#237245'],['AMARELO','#856b10']];
+const sportWords=[{"word": "BOLAS", "sport": "Tênis", "hint": "Está envolvido nas trocas entre os adversários."}, {"word": "CORDA", "sport": "Ginástica rítmica", "hint": "Sua trajetória acompanha o movimento da atleta."}, {"word": "ARCOS", "sport": "Ginástica rítmica", "hint": "Faz parte da composição entre corpo e aparelho."}, {"word": "FITAS", "sport": "Ginástica rítmica", "hint": "O manejo exige continuidade e controle."}, {"word": "MACAS", "sport": "Ginástica rítmica", "hint": "A coordenação entre os dois lados do corpo é importante para seu manejo."}, {"word": "TRAVE", "sport": "Ginástica artística", "hint": "Nesse aparelho, a precisão do posicionamento faz diferença."}, {"word": "BARRA", "sport": "Ginástica artística", "hint": "Nesse aparelho, é preciso controlar o corpo em relação a um apoio."}, {"word": "MAIOS", "sport": "Natação", "hint": "Faz parte da preparação do atleta antes de entrar na água."}, {"word": "TOUCA", "sport": "Natação", "hint": "É um acessório de uso pessoal comum nos treinos."}, {"word": "OCULOS", "sport": "Natação", "hint": "Pode ajudar o atleta a perceber o ambiente durante o percurso."}, {"word": "PRANCHA", "sport": "Natação", "hint": "Pode ser utilizado para concentrar o treino em parte do movimento."}, {"word": "PALMAR", "sport": "Natação", "hint": "É utilizado em alguns exercícios de aperfeiçoamento técnico."}, {"word": "REMO", "sport": "Canoagem", "hint": "Ajuda a transformar o esforço do atleta em deslocamento."}, {"word": "BARCO", "sport": "Remo", "hint": "Seu ajuste e sua estabilidade influenciam a execução."}, {"word": "COLETE", "sport": "Canoagem", "hint": "Seu uso está relacionado aos cuidados durante a prática."}, {"word": "ESPADA", "sport": "Esgrima", "hint": "A escolha desse equipamento influencia a forma de disputar."}, {"word": "FLORETE", "sport": "Esgrima", "hint": "Está ligado a uma das especialidades da modalidade."}, {"word": "SABRE", "sport": "Esgrima", "hint": "Exige controle e precisão no manejo."}, {"word": "MASCARA", "sport": "Esgrima", "hint": "Faz parte dos cuidados para o confronto entre os atletas."}, {"word": "KIMONO", "sport": "Judô", "hint": "Está presente tanto na preparação quanto no combate."}, {"word": "FAIXA", "sport": "Judô", "hint": "Tem significado dentro do percurso de aprendizagem do atleta."}, {"word": "TATAME", "sport": "Judô", "hint": "Faz parte do ambiente em que as técnicas são executadas."}, {"word": "BOLA", "sport": "Vôlei", "hint": "Sua trajetória exige antecipação dos jogadores."}, {"word": "REDE", "sport": "Vôlei", "hint": "É uma referência para o posicionamento e a trajetória das jogadas."}, {"word": "ANTENA", "sport": "Vôlei", "hint": "Serve como referência para decisões durante a partida."}, {"word": "CESTA", "sport": "Basquete", "hint": "Está ligada à conclusão de uma jogada ofensiva."}, {"word": "ARO", "sport": "Basquete", "hint": "Pequenas diferenças na trajetória podem mudar o resultado junto dele."}, {"word": "TABELA", "sport": "Basquete", "hint": "Pode participar de diferentes soluções de uma jogada ofensiva."}, {"word": "CHUTEIRA", "sport": "Futebol", "hint": "Sua escolha considera as condições de prática."}, {"word": "LUVAS", "sport": "Futebol", "hint": "É um equipamento associado a uma função específica na equipe."}, {"word": "APITO", "sport": "Futebol", "hint": "É utilizado na organização da partida."}, {"word": "RAQUETE", "sport": "Tênis", "hint": "Seu manejo influencia a precisão e a direção da jogada."}, {"word": "REDE", "sport": "Tênis", "hint": "É uma referência para o posicionamento e a trajetória das jogadas."}, {"word": "RAQUETE", "sport": "Padel", "hint": "Seu manejo influencia a precisão e a direção da jogada."}, {"word": "DISCO", "sport": "Atletismo", "hint": "Seu desempenho depende da combinação entre técnica, força e trajetória."}, {"word": "DARDO", "sport": "Atletismo", "hint": "A preparação do movimento é importante para sua trajetória final."}, {"word": "PESO", "sport": "Atletismo", "hint": "Seu uso aparece em uma prova de campo."}, {"word": "BASTAO", "sport": "Atletismo", "hint": "A coordenação entre companheiros faz diferença no uso dele."}, {"word": "BARREIRA", "sport": "Atletismo", "hint": "Exige ajuste do ritmo ao longo do percurso."}, {"word": "BICICLETA", "sport": "Ciclismo", "hint": "A relação entre atleta e equipamento exige ajustes para a prática."}, {"word": "CAPACETE", "sport": "Ciclismo", "hint": "Faz parte da preparação para praticar com cuidado."}];
+
+/* ---------- estado ---------- */
+const KEY='near-lab-gincana-v2',PKEY='near-lab-perfil-v1';
+let records=[],profile=null,curLevel=1,hFilter='all';
+let selected=0,active=false,token=0,timers=[],pending=false,round=0,hits=0,errors=0,rts=[],onset=0,expected=null,level=1,seq=[],pos=0,total=12,identity='',mode='real',stageName='intro';
+let digitOrder=[],digitPos=0,secret='',attempts=0,wordLog=null,currentWord=null,falseStarts=0,skipped=0,usedWords=new Set();
+let storageFail=false;
+try{const raw=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(raw))records=raw.filter(r=>r&&typeof r.game==='string'&&Number.isFinite(r.accuracy))}catch{storageFail=true}
+try{const p=JSON.parse(localStorage.getItem(PKEY)||'null');if(p&&typeof p.name==='string'&&p.name.trim()){profile={name:p.name.trim(),level:[1,2,3].includes(p.level)?p.level:1};curLevel=profile.level}}catch{}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(records))}catch{storageFail=true;renderTeam()}}
+function saveProfile(){try{localStorage.setItem(PKEY,JSON.stringify(profile))}catch{}}
+
+/* ---------- pontuação ---------- */
+function playerKey(n){return n.trim().normalize('NFC').toLocaleLowerCase('pt-BR')}
+function gid(r){return Number.isInteger(r.gameId)?r.gameId:games.findIndex(g=>g.name===r.game)}
+function totals(){const map=new Map();for(const r of records){const k=playerKey(r.athlete);if(!map.has(k))map.set(k,{name:r.athlete,games:Array(games.length).fill(0),counts:Array(games.length).fill(0),total:0,sessions:0});const row=map.get(k);const pts=Number.isFinite(r.points)?r.points:r.accuracy;const id=gid(r);if(id>=0&&id<games.length){row.games[id]+=pts;row.counts[id]++}row.total+=pts;row.sessions++}return [...map.values()].sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name,'pt-BR'))}
+function places(rows){let prev=null,pl=0;return rows.map((r,i)=>{if(r.total!==prev)pl=i+1;prev=r.total;return pl})}
+function rowFor(name){return name?totals().find(r=>playerKey(r.name)===playerKey(name))||null:null}
+function playerTotal(name){return rowFor(name)?.total||0}
+function rankOf(name){const rows=totals(),pl=places(rows),i=rows.findIndex(r=>playerKey(r.name)===playerKey(name));return i<0?null:{place:pl[i],of:rows.length}}
+function playedCount(row){return row?row.counts.filter((c,i)=>c>0&&games[i].competitive!==false).length:0}
+function bestFor(name,id){if(!name)return null;const k=playerKey(name);const a=records.filter(r=>playerKey(r.athlete)===k&&gid(r)===id).map(r=>r.accuracy);return a.length?Math.max(...a):null}
+function countFor(name,id){if(!name)return 0;const k=playerKey(name);return records.filter(r=>playerKey(r.athlete)===k&&gid(r)===id).length}
+function suggestNext(name,cur){const comp=games.filter(g=>g.competitive!==false).map(g=>g.id);const after=comp.filter(id=>id>cur).concat(comp.filter(id=>id<=cur)).filter(id=>id!==cur);const counts=after.map(id=>countFor(name,id));const min=Math.min(...counts);const id=after[counts.indexOf(min)];return {id,unplayed:min===0}}
+function seconds(ms){return (ms/1000).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:3})}
+function median(v){const a=v.slice().sort((x,y)=>x-y),m=Math.floor(a.length/2);return a.length?(a.length%2?a[m]:(a[m-1]+a[m])/2):null}
+function icoHTML(g,extra){return '<span class="ico'+(extra?' '+extra:'')+'" style="--c:'+g.c+'">'+g.icon+'</span>'}
+
+/* ---------- roteamento ---------- */
+const VIEWS=['home','games','play','team','about'];
+function route(){
+  const parts=location.hash.replace(/^#\/?/,'').split('/');const name=parts[0]||'home';
+  if(active){active=false;cancel()}
+  let view='home';
+  if(name==='jogos')view='games';
+  else if(name==='jogar'){const n=Number(parts[1]);if(parts[1]!==undefined&&Number.isInteger(n)&&n>=0&&n<games.length){selected=n;view='play'}else{location.replace('#/jogos');return}}
+  else if(name==='equipe')view='team';
+  else if(name==='sobre')view='about';
+  VIEWS.forEach(v=>$('view-'+v).hidden=v!==view);
+  document.body.dataset.view=view;
+  document.querySelectorAll('[data-nav]').forEach(a=>{if(a.dataset.nav===view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  $('footNote').hidden=view==='play';
+  renderChip();
+  if(view==='home')renderHome();
+  if(view==='games')renderGames();
+  if(view==='play')renderIntro();
+  if(view==='team')renderTeam();
+  window.scrollTo(0,0);
+  const h=view==='home'?$('homeTitle'):view==='games'?$('gamesTitle'):view==='play'?$('inName'):view==='team'?$('teamTitle'):$('aboutTitle');
+  h.focus({preventScroll:true});
+  if((view==='games'||view==='play')&&!profile)openOnboard(1);
+}
+window.addEventListener('hashchange',route);
+
+/* ---------- topo / chip ---------- */
+function renderChip(){
+  const c=$('chip');
+  if(!profile){c.className='chip empty';c.textContent='Entrar';c.setAttribute('aria-label','Identificar participante');return}
+  c.className='chip';
+  c.innerHTML='<span class="av">'+esc(profile.name.charAt(0).toUpperCase())+'</span><span class="tx"><b>'+esc(profile.name)+'</b><small>'+playerTotal(profile.name)+' pts</small></span>';
+  c.setAttribute('aria-label','Participante '+profile.name+', '+playerTotal(profile.name)+' pontos. Trocar participante');
+}
+$('chip').onclick=()=>openOnboard(2);
+
+/* ---------- início ---------- */
+function renderHome(){
+  const label=profile?'Continuar, '+profile.name+' →':'Começar a jogar →';
+  $('homeCta').textContent=label;$('homeCta2').textContent=label;
+  $('heroIcons').innerHTML=games.map(g=>'<span>'+g.icon+'</span>').join('');
+  $('homeTiles').innerHTML=games.map(g=>'<a class="tile-link" href="#/jogar/'+g.id+'" style="--c:'+g.c+'">'+icoHTML(g)+'<span><b>'+esc(g.name)+'</b><small>'+esc(g.cat)+(g.competitive===false?' · sem pontos':'')+'</small></span></a>').join('');
+}
+
+/* ---------- hub de jogos ---------- */
+function gameCard(g,name){
+  const best=bestFor(name,g.id);
+  let chip;
+  if(g.competitive===false)chip='<span class="st">Sem pontos</span>';
+  else chip=best==null?'<span class="st new">Novo</span>':'<span class="st done">Melhor '+best+'%</span>';
+  const meta=g.competitive===false?'1 minuto':g.time+' · '+RT[g.id]+' '+g.unit;
+  return '<a class="gcard" href="#/jogar/'+g.id+'" style="--c:'+g.c+'"><div class="top">'+icoHTML(g)+chip+'</div><div><h3>'+esc(g.name)+'</h3><p>'+esc(g.desc)+'</p></div><div class="foot"><span>'+meta+'</span><span class="go">Jogar →</span></div></a>';
+}
+function renderGames(){
+  const name=profile?profile.name:'';
+  $('gmHello').textContent=name?'Olá, '+name:'Jogos';
+  const row=rowFor(name),rk=name?rankOf(name):null,played=playedCount(row);
+  $('gmProgress').innerHTML='<div class="progress-card"><div class="pc-item"><small>Seus pontos</small><b class="pts">'+(row?row.total:0)+'</b></div><div class="pc-item"><small>Jogos jogados</small><b>'+played+' de '+COMP_COUNT+'</b></div><div class="pc-item"><small>Posição na equipe</small><b>'+(rk?rk.place+'º':'—')+'</b></div><div class="pc-bar"><small class="muted" style="font-size:12px;font-weight:650">Seu circuito</small><div class="bar"><i style="width:'+Math.round(played/COMP_COUNT*100)+'%"></i></div></div></div>';
+  const s=suggestNext(name,-1),sg=games[s.id];
+  $('gmSuggest').innerHTML='<div class="suggest">'+icoHTML(sg)+'<div class="tx"><small>'+(s.unplayed?'Próximo desafio sugerido':'Que tal melhorar?')+'</small><b>'+esc(sg.name)+'</b></div><a class="btn btn-go" href="#/jogar/'+sg.id+'">Jogar agora →</a></div>';
+  $('gmCards').innerHTML=games.filter(g=>g.competitive!==false).map(g=>gameCard(g,name)).join('');
+  $('gmMind').innerHTML=games.filter(g=>g.competitive===false).map(g=>gameCard(g,name)).join('');
+}
+
+/* ---------- onboarding ---------- */
+let obStep=1,obStart=1,obName='',obLevel=1;
+function openOnboard(step){
+  obStart=step;obStep=step;obName=profile?profile.name:'';obLevel=profile?profile.level:1;
+  $('onboard').hidden=false;document.body.style.overflow='hidden';renderOb();
+}
+function closeOb(done){
+  $('onboard').hidden=true;document.body.style.overflow='';
+  if(!done&&!profile&&(document.body.dataset.view==='games'||document.body.dataset.view==='play'))location.hash='#/';
+}
+function renderOb(){
+  const box=$('obBox');
+  const steps=obStart===2?[2,3]:[1,2,3];
+  const dots='<div class="dots" aria-hidden="true">'+steps.map(s=>'<i class="'+(s<=obStep?'on':'')+'"></i>').join('')+'</div>';
+  const close='<button class="x" type="button" id="obClose" aria-label="Fechar">×</button>';
+  let body='';
+  if(obStep===1){
+    body='<h2 id="obTitle">Bem-vindo à Olimpíada Cognitiva</h2><p>Treine atenção, memória e tomada de decisão com desafios curtos feitos para atletas.</p><ul class="ob-list"><li><span class="ico">'+games[0].icon+'</span><span>10 desafios e 1 prática de atenção plena</span></li><li><span class="ico">'+games[6].icon+'</span><span>Cada sessão vale de 0 a 100 pontos</span></li><li><span class="ico">'+svg('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.7 0 4.5 1.8 4.5 4.5"/>')+'</span><span>Sua equipe acompanha o placar</span></li></ul><div class="ob-actions"><button class="btn btn-go btn-lg" id="obNext" type="button">Começar</button></div>';
+  }else if(obStep===2){
+    const names=totals().map(r=>r.name);
+    body='<h2 id="obTitle">'+(obStart===2&&profile?'Trocar participante':'Quem vai jogar?')+'</h2><p>Use seu nome ou o código combinado com a equipe. Seus pontos ficam ligados a ele.</p><label class="field">Nome ou código<input id="obName" maxlength="40" autocomplete="off" placeholder="Ex.: Ana ou A-07" value="'+esc(obName)+'"></label><div class="err" id="obErr" role="alert"></div>'+(names.length?'<div><p style="font-size:13px;margin-bottom:8px">Já jogaram neste aparelho:</p><div class="chips" id="obChips">'+names.slice(0,12).map(n=>'<button type="button" data-n="'+esc(n)+'">'+esc(n)+'</button>').join('')+'</div></div>':'')+'<div class="ob-actions">'+(obStart===1?'<button class="btn" id="obBack" type="button">Voltar</button>':'')+'<button class="btn btn-go btn-lg" id="obNext" type="button">Continuar</button></div>';
+  }else{
+    body='<h2 id="obTitle">Escolha seu nível</h2><p>Você pode mudar antes de cada jogo.</p><div class="lvls" role="radiogroup" aria-label="Nível">'+LEVEL_TEXT.map((t,i)=>'<button type="button" class="lvl" role="radio" data-l="'+(i+1)+'" aria-checked="'+(obLevel===i+1)+'"><span class="radio"></span><span><b>'+t[0]+'</b><small>'+t[1]+'</small></span></button>').join('')+'</div><div class="ob-actions"><button class="btn" id="obBack" type="button">Voltar</button><button class="btn btn-go btn-lg" id="obNext" type="button">'+(profile&&obStart===2?'Salvar':'Ir para os jogos →')+'</button></div>';
+  }
+  box.innerHTML=close+dots+body;
+  $('obClose').onclick=()=>closeOb(false);
+  const next=$('obNext'),back=$('obBack');
+  if(back)back.onclick=()=>{if(obStep===2)obName=($('obName')||{}).value||obName;obStep--;renderOb()};
+  if(obStep===1)next.onclick=()=>{obStep=2;renderOb()};
+  if(obStep===2){
+    const input=$('obName');
+    const go=()=>{const v=input.value.trim();if(!v){$('obErr').textContent='Digite um nome ou código para continuar.';input.focus();return}const known=totals().find(r=>playerKey(r.name)===playerKey(v));obName=known?known.name:v;obStep=3;renderOb()};
+    next.onclick=go;input.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();go()}};
+    const chips=$('obChips');if(chips)chips.onclick=e=>{const b=e.target.closest('[data-n]');if(b){input.value=b.dataset.n;$('obErr').textContent=''}};
+    input.focus();
+  }
+  if(obStep===3){
+    box.querySelectorAll('.lvl').forEach(b=>b.onclick=()=>{obLevel=+b.dataset.l;box.querySelectorAll('.lvl').forEach(x=>x.setAttribute('aria-checked',x===b))});
+    next.onclick=()=>{profile={name:obName,level:obLevel};curLevel=obLevel;saveProfile();closeOb(true);route()};
+  }
+  if(obStep===1)next.focus();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('onboard').hidden)closeOb(false)});
+
+/* ---------- tela de regras ---------- */
+function wm(guess,target){return wordMarks(guess,target)}
+function demoHTML(i){
+  const cap=t=>'<p class="demo-cap">'+t+'</p>',lab='<small class="lab">Exemplo</small>';
+  if(i===0)return lab+'<div class="defense-arrows"><span class="flank-arrow">←</span><span class="flank-arrow">←</span><span class="central-arrow">→</span><span class="flank-arrow">←</span><span class="flank-arrow">←</span></div>'+cap('Só vale a seta do meio: toque <b>Direita →</b>.');
+  if(i===1)return lab+'<div class="demo-row"><span class="pill go">⚑ LARGADA</span></div>'+cap('Toque agora!')+'<div class="demo-row"><span class="pill wait">■ AGUARDE</span></div>'+cap('Não faça nada.');
+  if(i===2)return lab+'<div class="grid">'+Array.from({length:9},(_,n)=>'<span class="tile'+([0,4,8].includes(n)?' lit':'')+'">'+(n===0?'1':n===4?'2':n===8?'3':'')+'</span>').join('')+'</div>'+cap('Ordem: 1 → 2 → 3. Depois, repita tocando nos mesmos setores.');
+  if(i===3)return lab+'<div class="stim" style="color:#b13c50">AZUL</div>'+cap('As letras estão vermelhas: toque <b>VERMELHO</b>.');
+  if(i===4)return lab+'<div class="shirts"><span class="shirt">23</span><span class="shirt">7</span><span class="shirt">41</span></div>'+cap('Crescente: toque <b>7 → 23 → 41</b>.');
+  if(i===5){const row=g=>'<div class="word-row">'+wm(g,'REDE').map((m,n)=>'<span class="letter '+m+'">'+g[n]+'</span>').join('')+'</div>';return lab+'<small class="lab" style="color:var(--ink2)">Vôlei · 4 letras · segredo: REDE</small>'+row('REDO')+row('ERRO')+cap('Verde: posição certa. Amarelo: outra posição. Cinza: ausente.')}
+  if(i===6)return lab+'<div class="demo-row"><span class="pill wait">AGUARDE</span><span>→</span><span class="pill go">JÁ!</span></div>'+cap('Reaja só quando aparecer <b>JÁ!</b>');
+  if(i===7)return lab+'<p style="font-weight:750;font-size:18px">Encontre a camisa 42</p><div class="shirts">'+[17,42,8].map(n=>'<span class="shirt'+(n===42?' hl':'')+'">'+n+'</span>').join('')+'</div><div class="shirts">'+[63,25,90].map(n=>'<span class="shirt">'+n+'</span>').join('')+'</div>'+cap('Toque na camisa com o número-alvo.');
+  if(i===8)return lab+'<div class="demo-row"><span class="rule-banner">SIGA</span><span class="stim" style="font-size:40px">→</span></div>'+cap('Toque <b>Direita</b>.')+'<div class="demo-row"><span class="rule-banner">INVERTA</span><span class="stim" style="font-size:40px">→</span></div>'+cap('Toque <b>Esquerda</b>.');
+  if(i===9)return lab+'<div class="dual-task"><div class="task-panel"><small>Direção</small><div class="stim">←</div><p class="demo-cap">Esquerda</p></div><div class="task-panel"><small>Paridade</small><div class="stim">47</div><p class="demo-cap">Ímpar</p></div></div>'+cap('Responda às duas, dentro do tempo.');
+  return lab+'<div class="breath-circle">Observe</div>'+cap('Sinta a respiração acontecer, no seu ritmo.');
+}
+function renderIntro(){
+  const g=games[selected],mind=g.competitive===false,name=profile?profile.name:'';
+  stage('intro');
+  $('inIcon').innerHTML=g.icon;$('inIcon').className='ico';$('inIcon').style.setProperty('--c',g.c);
+  $('introBox').style.setProperty('--c',g.c);
+  $('inCat').textContent=g.cat;$('inName').textContent=g.name;$('inDesc').textContent=g.desc;
+  $('inSteps').innerHTML=g.steps.map(s=>'<li>'+esc(s)+'</li>').join('');
+  $('inKeys').textContent=g.keys;$('inRule').textContent=g.rule;
+  $('inDemo').innerHTML=demoHTML(selected);
+  $('inLevelBox').hidden=mind;$('inNoPoints').hidden=!mind;$('btnPractice').hidden=mind;
+  $('btnReal').textContent=mind?'Começar prática':'Começar valendo pontos';
+  syncSeg();
+  const best=bestFor(name,selected),cnt=countFor(name,selected);
+  $('inBest').hidden=mind;
+  $('inBest').textContent=best==null?'Você ainda não jogou este jogo.':'Sua melhor sessão: '+best+'% · '+cnt+' '+(cnt===1?'sessão':'sessões');
+}
+function syncSeg(){
+  document.querySelectorAll('#inSeg button').forEach(b=>b.setAttribute('aria-checked',+b.dataset.level===curLevel));
+  $('inLvlNote').textContent=LEVEL_TEXT[curLevel-1][1]+(selected===5?' Neste jogo as regras são iguais nos três níveis.':'');
+}
+document.querySelectorAll('#inSeg button').forEach(b=>b.onclick=()=>{curLevel=+b.dataset.level;if(profile){profile.level=curLevel;saveProfile()}syncSeg()});
+$('btnReal').onclick=()=>startRun('real');
+$('btnPractice').onclick=()=>startRun('practice');
+
+/* ---------- palco: intro / run / result ---------- */
+function stage(s){
+  stageName=s;
+  $('introBox').hidden=s!=='intro';$('runBox').hidden=s!=='run';$('resultBox').hidden=s!=='result';
+  $('pbarWrap').hidden=s!=='run';
+  const g=games[selected];$('pTitle').textContent=g.name;
+  const badge=$('pBadge');badge.hidden=s==='intro';badge.className='badge';
+  if(s==='run'){badge.textContent=mode==='practice'?'Treino · não pontua':g.competitive===false?'Prática':'Valendo pontos';badge.classList.add(mode==='practice'?'try':'live')}
+  if(s==='result'){badge.textContent='Concluído'}
+  $('backBtn').textContent=s==='run'?'✕ Encerrar':'← Jogos';
+  window.scrollTo(0,0);
+}
+$('backBtn').onclick=()=>{if(stageName==='run'&&active)abortRun('Você encerrou a sessão. Nada foi salvo.');else location.hash='#/jogos'};
+
+/* ---------- motor ---------- */
+function later(fn,ms){const t=token;timers.push(setTimeout(()=>{if(t===token&&active)fn()},ms))}
+function cancel(){timers.forEach(clearTimeout);timers=[];token++;pending=false}
+function rand(n){return Math.floor(Math.random()*n)}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rand(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+function fb(text,kind){const f=$('feedback');f.textContent=text;f.className=kind||'';if(kind==='ok'||kind==='bad'){const a=$('arena');a.classList.remove('ok','bad');a.classList.add(kind);setTimeout(()=>a.classList.remove('ok','bad'),420)}}
+function limitBar(ms){const old=$('arena').querySelector('.tbar');if(old)old.remove();const b=el('div','tbar'),i=document.createElement('i');b.append(i);$('arena').append(b);i.style.transition='none';i.style.width='100%';void i.offsetWidth;i.style.transition='width '+ms+'ms linear';i.style.width='0%'}
+function stats(){
+  const mind=selected===10;
+  $('stRound').textContent=mind?'—':Math.min(round,total)+'/'+total;
+  $('stHits').textContent=mind?'—':hits;$('stErrors').textContent=mind?'—':errors;
+  $('stPoints').textContent=(mind||mode==='practice')?'—':'+'+Math.round(hits/total*100);
+  if(!mind)$('pBar').style.width=Math.min(100,(hits+errors)/total*100)+'%';
+}
+function controls(labels,fn){const box=el('div','choices');labels.forEach((t,i)=>box.append(button(t,()=>fn(i))));$('arena').append(box)}
+
+function startRun(m){
+  if(!profile){openOnboard(2);return}
+  cancel();mode=m;active=true;pending=false;round=hits=errors=falseStarts=skipped=0;usedWords=new Set();rts=[];
+  level=curLevel;identity=profile.name;total=m==='practice'?PR[selected]:RT[selected];
+  stage('run');
+  $('pBar').style.transition='width .3s';$('pBar').style.width='0%';
+  stats();fb('','');
+  if(selected===10){next();return}
+  const s=el('div','countdown','');$('arena').replaceChildren(s);
+  fb(m==='practice'?'Treino: nada será salvo. Prepare-se.':'Prepare-se. A sessão vai começar.','');
+  ['3','2','1','JÁ!'].forEach((t,i)=>later(()=>{s.textContent=t;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop')},i*800));
+  later(()=>{fb('','');next()},3000);
+}
+function next(){pending=false;if(round>=total){finish();return}round++;stats();$('arena').replaceChildren();const s=el('div','stim','Prepare-se…');$('arena').append(s);later(()=>stimulus(s),500+rand(600))}
+function stimulus(s){
+  if(selected===9){dividedAttention(s);return}if(selected===10){mindfulPractice(s);return}if(selected===6){simpleReaction(s);return}if(selected===7){visualSearch(s);return}if(selected===8){switchRule(s);return}if(selected===4){digits(s);return}if(selected===5){words(s);return}
+  onset=performance.now();pending=true;const limit=[2400,1700,1100][level-1];
+  if(selected===0){
+    expected=Math.random()<[.15,.25,.30][level-1]?-2:rand(2);s.className='defense-arrows';s.textContent='';
+    const base=expected===-2?rand(2):expected;const conflict=level>1&&Math.random()<[0,.6,.8][level-1];const flank=conflict?1-base:base;
+    for(let i=0;i<5;i++){const arrow=document.createElement('span');const central=i===2;arrow.className=central?'central-arrow':'flank-arrow';arrow.textContent=central?(expected===-2?'':expected?'→':'←'):(flank?'→':'←');if(central)arrow.setAttribute('aria-label',expected===-2?'Centro vazio: não responder':expected?'Seta central: direita':'Seta central: esquerda');else arrow.setAttribute('aria-hidden','true');s.append(arrow)}
+    const cue=el('small','notice','Vale o centro · centro vazio = não tocar');$('arena').append(cue);
+    controls(['← Esquerda','Direita →'],i=>respond(i));limitBar(limit);later(()=>respond(expected===-2?-2:-1),limit);
+  }else if(selected===1){
+    expected=Math.random()<.65?1:0;s.textContent=expected?'⚑ LARGADA':'■ AGUARDE';s.style.color=expected?'#237245':'#856b10';
+    controls(['TOCAR / espaço'],()=>respond(1));limitBar(limit);later(()=>respond(0),limit);
+  }else if(selected===3){
+    expected=rand(4);s.textContent=colors[rand(4)][0];s.style.color=colors[expected][1];
+    controls(colors.map((c,i)=>(i+1)+' · '+c[0]),i=>respond(i));limitBar(limit+700);later(()=>respond(-1),limit+700);
+  }else{
+    pending=false;s.className='muted';s.textContent='Observe a rota da jogada';seq=Array.from({length:level+round},()=>rand(9));pos=0;
+    const grid=el('div','grid');for(let i=0;i<9;i++){const b=button(String(i+1),()=>memory(i),'tile');b.setAttribute('aria-label','Setor da quadra '+(i+1));b.disabled=true;grid.append(b)}$('arena').append(grid);
+    const speed=[750,600,450][level-1];
+    seq.forEach((n,i)=>{later(()=>grid.children[n].classList.add('lit'),i*speed+400);later(()=>grid.children[n].classList.remove('lit'),i*speed+400+speed*.65)});
+    later(()=>{s.textContent='Sua vez — repita a ordem';pending=true;[...grid.children].forEach(b=>b.disabled=false);limitBar(20000);later(()=>memory(-1),20000)},seq.length*speed+500);
+  }
+}
+function dividedAttention(s){
+  s.className='muted';s.textContent='Duas tarefas · uma rodada';
+  const direction=rand(2),number=rand(90)+10;const wrapper=el('div','dual-task');let completed=0,correct=true;
+  const tasks=[{label:'Direção',stim:direction?'→':'←',choices:['← Esquerda','Direita →'],answer:direction},{label:'Paridade',stim:String(number),choices:['Par','Ímpar'],answer:number%2}];
+  pending=true;
+  tasks.forEach(task=>{const panel=el('div','task-panel');const label=el('small','',task.label);const stim=el('div','stim',task.stim);const choices=el('div','choices');let answered=false;
+    task.choices.forEach((text,i)=>choices.append(button(text,()=>{if(!pending||answered)return;answered=true;correct=correct&&i===task.answer;completed++;[...choices.children].forEach(b=>b.disabled=true);if(completed===2)endDual(correct)})));
+    panel.append(label,stim,choices);wrapper.append(panel)});
+  $('arena').append(wrapper);onset=performance.now();const lim=[7000,5000,3500][level-1];limitBar(lim);later(()=>endDual(false),lim);
+}
+function endDual(ok){if(!pending)return;pending=false;if(ok){hits++;rts.push(performance.now()-onset)}else errors++;cancel();stats();fb(ok?'As duas respostas estão corretas.':'Uma resposta ficou incorreta ou faltou responder no tempo.',ok?'ok':'bad');later(next,900)}
+function mindfulPractice(s){
+  s.className='muted';$('pbarWrap').hidden=false;const bar=$('pBar');bar.style.transition='none';bar.style.width='0%';void bar.offsetWidth;bar.style.transition='width 60s linear';bar.style.width='100%';
+  const circle=el('div','breath-circle','60');$('arena').append(circle);s.textContent='Sinta a respiração acontecer, no seu ritmo.';
+  const prompts=['Perceba o contato dos pés e do corpo com o apoio.','Observe o ar entrar e sair, sem controlar.','Se surgir um pensamento, reconheça e volte à respiração.','Observe como está seu corpo neste momento.','Retorne ao ambiente ao seu redor, com calma.'];
+  prompts.forEach((text,i)=>later(()=>{s.textContent=text},i*12000));
+  for(let i=1;i<60;i++)later(()=>{circle.textContent=String(60-i)},i*1000);
+  later(()=>{active=false;cancel();bar.style.transition='none';bar.style.width='100%';showMindResult()},60000);
+}
+function simpleReaction(s){
+  s.className='stim';s.textContent='AGUARDE';s.style.color='#856b10';expected='wait';pending=true;
+  controls(['REAGIR / espaço'],()=>respond(1));fb('Espere pelo sinal JÁ.','');
+  later(()=>{s.textContent='JÁ!';s.style.color='#237245';expected=1;onset=performance.now();fb('Reaja agora!','');const lim=[2500,1800,1200][level-1];limitBar(lim);later(()=>respond(-1),lim)},1500+rand(2501));
+}
+function visualSearch(s){
+  s.className='muted';const count=[9,16,25][level-1],values=shuffle(Array.from({length:99},(_,i)=>i+1)).slice(0,count);const target=values[rand(count)];expected=target;
+  s.textContent='Encontre a camisa '+target;s.style.fontWeight='750';s.style.fontSize='22px';
+  const board=el('div','search-board');board.style.gridTemplateColumns='repeat('+[3,4,5][level-1]+',1fr)';
+  values.forEach(n=>{const b=button(String(n),()=>respond(n));b.setAttribute('aria-label','Camisa '+n);board.append(b)});$('arena').append(board);
+  pending=true;onset=performance.now();const lim=[9000,7000,5000][level-1];limitBar(lim);later(()=>respond(-1),lim);
+}
+function switchRule(s){
+  s.className='stim';const reverse=level===1?Math.floor((round-1)/3)%2===1:rand(2)===1;const direction=rand(2);expected=reverse?1-direction:direction;
+  const command=el('strong','rule-banner',reverse?'INVERTA · lado oposto':'SIGA · mesmo lado');$('arena').append(command);s.textContent=direction?'→':'←';
+  controls(['← Esquerda','Direita →'],i=>respond(i));pending=true;onset=performance.now();const lim=[3000,2200,1500][level-1];limitBar(lim);later(()=>respond(-1),lim);
+}
+function respond(value){
+  if(!active||!pending||![0,1,3,6,7,8].includes(selected))return;
+  if(selected===6&&expected==='wait'){falseStarts++;errors++;pending=false;cancel();stats();fb('Antecipação: espere aparecer JÁ. Esta rodada não tem tempo válido.','bad');later(next,1000);return}
+  pending=false;const ok=value===expected;
+  if(ok){hits++;if(!(selected===1&&expected===0)&&!(selected===0&&expected===-2))rts.push(performance.now()-onset)}else errors++;
+  cancel();stats();
+  fb(ok?(selected===0&&expected===-2?'Correto: você esperou com o centro vazio.':selected===1&&expected===0?'Correto: você se segurou.':'Correto.'):value===-1?'Tempo esgotado.':'Resposta diferente da regra. Retome o foco.',ok?'ok':'bad');
+  later(next,650);
+}
+function memory(i){
+  if(!active||!pending||selected!==2)return;
+  if(i!==seq[pos]){pending=false;errors++;cancel();stats();fb(i===-1?'Tempo esgotado.':'Sequência diferente. Vamos para a próxima rodada.','bad');later(next,1000);return}
+  const tile=$('arena').querySelectorAll('.tile')[i];tile.classList.add('lit');later(()=>tile.classList.remove('lit'),160);pos++;
+  if(pos===seq.length){pending=false;hits++;cancel();stats();fb('Sequência completa!','ok');later(next,850)}
+}
+function digits(s){
+  s.className='muted';const descending=round%2===0;const count=level+round+2;const values=shuffle(Array.from({length:90},(_,i)=>i+1)).slice(0,count);
+  digitOrder=values.slice().sort((a,b)=>descending?b-a:a-b);digitPos=0;
+  s.textContent=(descending?'DECRESCENTE ↓ · maior para menor':'CRESCENTE ↑ · menor para maior')+' · '+count+' camisas';s.style.fontWeight='750';s.style.fontSize='20px';
+  const board=el('div','number-board');
+  shuffle(values).forEach(n=>{const b=button(String(n),()=>{if(!pending)return;if(n!==digitOrder[digitPos]){endDigits(false,'Ordem diferente da regra. O próximo número era '+digitOrder[digitPos]+'.');return}b.disabled=true;b.classList.add('done');digitPos++;fb(digitPos+' de '+count+' selecionados','');if(digitPos===count)endDigits(true,'Sequência correta!')});board.append(b)});
+  $('arena').append(board);pending=true;onset=performance.now();fb('Siga a ordem indicada.','');
+  const lim=[60000,50000,40000][level-1];limitBar(lim);later(()=>endDigits(false,'Tempo esgotado.'),lim);
+}
+function endDigits(ok,message){if(!pending)return;pending=false;if(ok){hits++;rts.push(performance.now()-onset)}else errors++;cancel();stats();fb(message,ok?'ok':'bad');later(next,1300)}
+function wordMarks(guess,target){const marks=Array(target.length).fill('absent'),left=target.split('');for(let i=0;i<target.length;i++)if(guess[i]===target[i]){marks[i]='exact';left[i]=null}for(let i=0;i<target.length;i++)if(marks[i]!=='exact'){const j=left.indexOf(guess[i]);if(j!==-1){marks[i]='present';left[j]=null}}return marks}
+function words(s){
+  s.className='muted';const available=sportWords.filter(w=>!usedWords.has(w.word));currentWord=available[rand(available.length)];usedWords.add(currentWord.word);secret=currentWord.word;
+  s.textContent='Palavra '+round+' de '+total+' · '+secret.length+' letras · 6 tentativas';s.style.fontSize='15px';
+  const category=el('h3','','Modalidade: '+currentWord.sport+' · descubra o objeto');$('arena').append(category);
+  attempts=0;wordLog=el('div','word-log');$('arena').append(wordLog);
+  const legend=el('p','notice','Verde: posição certa · Amarelo: outra posição · Cinza: ausente');$('arena').append(legend);
+  const hintText=el('p','notice');hintText.setAttribute('role','status');
+  const hintButton=button('💡 Pedir dica',()=>{if(!pending)return;hintText.textContent='Dica: '+currentWord.hint;hintButton.disabled=true;hintButton.textContent='Dica revelada';input.focus()},'btn btn-sm');
+  $('arena').append(hintButton,hintText);
+  const form=el('form','choices');const input=el('input','word-input');input.maxLength=secret.length;input.style.width=Math.max(170,secret.length*28)+'px';input.autocomplete='off';input.spellcheck=false;input.setAttribute('aria-label','Objeto esportivo com '+secret.length+' letras');input.placeholder='PALAVRA';
+  const send=button('Tentar',()=>{});send.type='submit';
+  const skip=button('Pular palavra',()=>{if(!pending)return;pending=false;skipped++;errors++;input.disabled=send.disabled=hintButton.disabled=skip.disabled=true;cancel();stats();fb('Palavra pulada: '+secret+'. Esta rodada vale zero pontos.','bad');later(next,2000)});
+  form.append(input,send,skip);$('arena').append(form);pending=true;
+  form.onsubmit=e=>{e.preventDefault();if(!pending)return;
+    const guess=input.value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().trim();
+    if(!/^[A-Z]+$/.test(guess)||guess.length!==secret.length){fb('Digite um objeto com '+secret.length+' letras, sem espaços.','');return}
+    attempts++;const marks=wordMarks(guess,secret);const row=el('div','word-row');
+    marks.forEach((mark,i)=>{const cell=el('span','letter '+mark,guess[i]);cell.title=mark==='exact'?'Posição certa':mark==='present'?'Outra posição':'Ausente';cell.setAttribute('aria-label',guess[i]+': '+cell.title);row.append(cell)});
+    wordLog.append(row);row.scrollIntoView({block:'nearest'});input.value='';const correct=guess===secret;
+    if(correct||attempts===6){pending=false;input.disabled=send.disabled=hintButton.disabled=skip.disabled=true;if(correct){hits++;fb('Palavra descoberta!','ok')}else{errors++;fb('A palavra era '+secret+'. Observe as pistas antes da próxima.','bad')}cancel();stats();later(next,2500)}
+    else{fb(attempts+' de 6 tentativas · '+marks.filter(m=>m==='exact').length+' letras na posição certa.','');input.focus()}
+  };
+  input.focus();
+}
+
+/* ---------- fim de sessão ---------- */
+function abortRun(msg){
+  active=false;cancel();stage('result');$('pBadge').textContent='Encerrada';
+  $('resultBox').innerHTML='<div class="res"><div class="res-head"><span class="badge">Sessão encerrada</span><h2>'+esc(games[selected].name)+'</h2><p class="muted" style="margin-top:8px">'+esc(msg)+'</p></div><div class="res-actions"><button class="btn btn-go btn-lg" data-act="again" type="button">Recomeçar</button><div class="row3"><button class="btn" data-act="intro" type="button">Ver regras</button><button class="btn" data-act="games" type="button">Outro jogo</button><button class="btn" data-act="team" type="button">Ver equipe</button></div></div></div>';
+}
+function finish(){
+  active=false;cancel();$('pBar').style.width='100%';
+  const accuracy=Math.round(hits/total*100),avg=rts.length?Math.round(rts.reduce((a,b)=>a+b,0)/rts.length):null;
+  if(mode==='practice'){showPractice(accuracy,avg);return}
+  const prevBest=bestFor(identity,selected),prevCount=countFor(identity,selected);
+  const r={date:new Date().toISOString(),athlete:identity,game:games[selected].name,level,hits,errors,total,accuracy,ms:avg,points:accuracy,gameId:selected,falseStarts,skipped,samples:rts.slice(),medianMs:rts.length?Math.round(median(rts)):null};
+  records.push(r);persist();renderChip();showResult(r,prevBest,prevCount);
+}
+function timeLabel(){return selected===4||selected===9?'Tempo por rodada correta':'Tempo médio'}
+function extraLines(r){
+  let h='';
+  if(selected===5)h+='<div class="extra">Palavras puladas: <b>'+r.skipped+'</b> · Rodadas sem acerto (incluindo puladas): <b>'+r.errors+'</b></div>';
+  if(selected===6)h+='<div class="extra">Reações válidas: <b>'+r.samples.length+'</b> · Antecipações: <b>'+r.falseStarts+'</b>'+(r.samples.length?' · Melhor: <b>'+seconds(Math.min(...r.samples))+' s</b> · Mediana: <b>'+seconds(r.medianMs)+' s</b>':'')+'</div>';
+  return h;
+}
+function reflectHTML(){return '<div class="reflect"><b>Para pensar</b>Qual estratégia ajudou? O que você faria diferente na próxima sessão?</div>'}
+function countUp(node,to,prefix){
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches||to===0){node.textContent=prefix+to;return}
+  const t0=performance.now(),d=800;(function f(t){const p=Math.min(1,(t-t0)/d);node.textContent=prefix+Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0);
+}
+function showResult(r,prevBest,prevCount){
+  stage('result');const g=games[selected],box=$('resultBox');
+  const rk=rankOf(identity),row=rowFor(identity),sug=suggestNext(identity,selected),sg=games[sug.id];
+  let rec;
+  if(prevBest==null)rec='<span class="rec">Primeira sessão neste jogo</span>';
+  else if(r.accuracy>prevBest)rec='<span class="rec new">★ Novo recorde pessoal · antes '+prevBest+'%</span>';
+  else if(r.accuracy===prevBest)rec='<span class="rec">Igual ao seu recorde ('+prevBest+'%)</span>';
+  else rec='<span class="rec">Seu recorde: '+prevBest+'%</span>';
+  box.innerHTML='<div class="res"><div class="res-head"><span class="badge">Sessão concluída</span><h2>'+esc(g.name)+'</h2><p class="muted" style="margin-top:6px">Nível '+LEVELS[r.level-1]+' · '+esc(identity)+'</p></div>'
+   +'<div class="score-card"><div class="score"><small>Pontos desta sessão</small><b id="resScore">+0</b>'+rec+'</div><dl class="res-stats"><div><dt>Acertos</dt><dd>'+r.hits+'/'+r.total+'</dd></div><div><dt>Erros</dt><dd>'+r.errors+'</dd></div><div><dt>'+timeLabel()+'</dt><dd>'+(r.ms==null?'—':seconds(r.ms)+' s')+'</dd></div></dl></div>'
+   +extraLines(r)
+   +'<div class="standing"><div>Total acumulado<b>'+(row?row.total:0)+' pts</b></div><div>Posição na equipe<b>'+(rk?rk.place+'º de '+rk.of:'—')+'</b></div><div>Jogos jogados<b>'+playedCount(row)+' de '+COMP_COUNT+'</b></div></div>'
+   +'<div class="next-card">'+icoHTML(sg)+'<div class="tx"><small>'+(sug.unplayed?'Sugestão: você ainda não jogou':'Sugestão: melhore seu resultado')+'</small><b>'+esc(sg.name)+'</b></div></div>'
+   +'<div class="res-actions"><button class="btn btn-go btn-lg" data-act="next" type="button">Próximo jogo: '+esc(sg.name)+' →</button><div class="row3"><button class="btn" data-act="again" type="button">Jogar de novo</button><button class="btn" data-act="team" type="button">Ver equipe</button><button class="btn" data-act="games" type="button">Todos os jogos</button></div></div>'
+   +reflectHTML()+'</div>';
+  box.dataset.next=sug.id;
+  countUp($('resScore'),r.points,'+');
+}
+function showPractice(accuracy,avg){
+  stage('result');$('pBadge').textContent='Treino concluído';
+  $('resultBox').innerHTML='<div class="res"><div class="res-head"><span class="badge try">Treino concluído</span><h2>Bom. Agora vale?</h2><p class="muted" style="margin-top:6px">Treino não pontua e nada foi salvo.</p></div>'
+   +'<div class="score-card"><div class="score"><small>No treino</small><b style="font-size:60px">'+accuracy+'%</b></div><dl class="res-stats"><div><dt>Acertos</dt><dd>'+hits+'/'+total+'</dd></div><div><dt>Erros</dt><dd>'+errors+'</dd></div><div><dt>'+timeLabel()+'</dt><dd>'+(avg==null?'—':seconds(avg)+' s')+'</dd></div></dl></div>'
+   +'<div class="res-actions"><button class="btn btn-go btn-lg" data-act="real" type="button">Começar valendo pontos</button><div class="row3"><button class="btn" data-act="practice" type="button">Treinar de novo</button><button class="btn" data-act="intro" type="button">Ver regras</button><button class="btn" data-act="games" type="button">Todos os jogos</button></div></div></div>';
+}
+function showMindResult(){
+  stage('result');$('pBadge').textContent='Prática concluída';
+  const sug=suggestNext(profile?profile.name:'',-1),sg=games[sug.id];
+  $('resultBox').dataset.next=sug.id;
+  $('resultBox').innerHTML='<div class="res"><div class="res-head"><span class="badge">Prática concluída</span><h2>Um minuto de atenção plena</h2><p class="muted" style="margin-top:6px">Esta prática não gera pontos nem classificação.</p></div>'
+   +'<div class="reflect"><b>Para pensar</b>Como foi perceber uma distração e retornar ao presente?</div>'
+   +'<div class="res-actions"><button class="btn btn-go btn-lg" data-act="next" type="button">Jogar: '+esc(sg.name)+' →</button><div class="row3"><button class="btn" data-act="again" type="button">Repetir prática</button><button class="btn" data-act="team" type="button">Ver equipe</button><button class="btn" data-act="games" type="button">Todos os jogos</button></div></div></div>';
+}
+$('resultBox').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+  if(a==='again')startRun('real');
+  else if(a==='real')startRun('real');
+  else if(a==='practice')startRun('practice');
+  else if(a==='intro')renderIntro();
+  else if(a==='team')location.hash='#/equipe';
+  else if(a==='games')location.hash='#/jogos';
+  else if(a==='next')location.hash='#/jogar/'+$('resultBox').dataset.next;
+});
+
+/* ---------- equipe ---------- */
+function renderTeam(){
+  $('storage').textContent=storageFail?'Não foi possível salvar no navegador. Exporte o CSV antes de fechar.':'';
+  const rows=totals(),pl=places(rows),name=profile?profile.name:'';
+  $('tmSummary').innerHTML='<div class="sum3"><div><small>Participantes</small><b>'+rows.length+'</b></div><div><small>Sessões registradas</small><b>'+records.length+'</b></div><div><small>Pontos da equipe</small><b>'+rows.reduce((a,r)=>a+r.total,0)+'</b></div></div>';
+  const me=rowFor(name),rk=name?rankOf(name):null;
+  if(name){
+    $('tmSummary').innerHTML+=me?'<div class="me-card"><div class="who"><small>Você</small><b>'+esc(name)+'</b></div><div class="mc"><small>Posição</small><b>'+rk.place+'º de '+rk.of+'</b></div><div class="mc"><small>Pontos</small><b>'+me.total+'</b></div><div class="mc"><small>Jogos jogados</small><b>'+playedCount(me)+' de '+COMP_COUNT+'</b></div><a class="btn btn-go" href="#/jogos">Jogar</a></div>':'<div class="me-card"><div class="who"><small>Você</small><b>'+esc(name)+'</b></div><span>Complete uma sessão para entrar no placar.</span><a class="btn btn-go" href="#/jogos">Jogar agora</a></div>';
+  }
+  const max=Math.max(1,...rows.map(r=>r.total));
+  $('tmBoard').innerHTML=rows.length?rows.map((r,i)=>{const mine=name&&playerKey(r.name)===playerKey(name);
+    return '<details class="lb'+(mine?' me':'')+'"><summary><span class="pl pl'+pl[i]+'">'+pl[i]+'</span><span class="lb-name">'+esc(r.name)+(mine?'<em>você</em>':'')+'</span><span class="lb-bar"><i style="width:'+Math.round(r.total/max*100)+'%"></i></span><b class="lb-pts">'+r.total+'</b><span class="lb-ses">'+r.sessions+(r.sessions===1?' sessão':' sessões')+'</span></summary><div class="lb-det">'+games.filter(g=>g.competitive!==false).map(g=>'<span>'+esc(g.name)+'<b>'+r.games[g.id]+'</b></span>').join('')+'</div></details>'}).join(''):'<div class="empty"><p>Placar zerado. Complete uma sessão para começar a gincana.</p><a class="btn btn-go" href="#/jogos">Ir para os jogos</a></div>';
+  renderHistory();
+}
+function renderHistory(){
+  const name=profile?profile.name:'';
+  document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===hFilter));
+  let list=records.slice().reverse();
+  if(hFilter==='mine')list=name?list.filter(r=>playerKey(r.athlete)===playerKey(name)):[];
+  $('tmHistory').innerHTML=list.length?list.slice(0,30).map(r=>{const id=gid(r);return '<div class="hrow"><div><b>'+esc(games[id]?.name||r.game)+' · '+LEVELS[(r.level||1)-1]+'</b><small>'+esc(r.athlete)+' · '+new Date(r.date).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})+'</small></div><div class="r"><b>+'+(Number.isFinite(r.points)?r.points:r.accuracy)+' pts</b><small>'+r.accuracy+'%'+(r.ms==null?'':' · '+seconds(r.ms)+' s')+'</small></div></div>'}).join('')+(list.length>30?'<p class="notice" style="margin-top:10px">Mostrando as 30 mais recentes. O CSV inclui todas.</p>':''):'<div class="empty"><p>'+(hFilter==='mine'&&!name?'Identifique-se para ver suas sessões.':'Suas sessões concluídas aparecerão aqui.')+'</p></div>';
+}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{hFilter=b.dataset.f;renderHistory()});
+$('clear').onclick=()=>{if(confirm('Zerar a gincana de TODOS os participantes neste navegador? Isso apaga pontos e histórico.')){records=[];persist();renderChip();renderTeam()}};
+$('export').onclick=()=>{
+  if(!records.length){$('storage').style.color='var(--muted)';$('storage').textContent='Conclua uma sessão para exportar resultados.';return}
+  const esc2=v=>'"'+String(v??'').replace(/^[=+@\-\t\r]/,"'$&").replaceAll('"','""')+'"';
+  const rows=[['Data ISO','Código','Jogo','Nível','Acertos','Erros','Tentativas','Precisão (%)','Pontos','Tempo médio (s)','Antecipações','Palavras puladas','Mediana (s)','Reações válidas (s)'],...records.map(r=>[r.date,r.athlete,games[gid(r)]?.name||r.game,r.level,r.hits,r.errors,r.total,r.accuracy,r.points,r.ms==null?'':seconds(r.ms),r.falseStarts??0,r.skipped??0,r.medianMs==null?'':seconds(r.medianMs),(r.samples||[]).map(x=>seconds(x)).join(' | ')])];
+  const url=URL.createObjectURL(new Blob(['\ufeff'+rows.map(row=>row.map(esc2).join(';')).join('\r\n')],{type:'text/csv;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download='near-lab-gincana.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+
+/* ---------- teclado e visibilidade ---------- */
+function gameKey(e){
+  if([0,8].includes(selected)&&['ArrowLeft','ArrowRight'].includes(e.key))return e.key==='ArrowRight'?1:0;
+  if([1,6].includes(selected)&&(e.code==='Space'||e.key===' '))return 1;
+  if(selected===3&&['1','2','3','4'].includes(e.key))return +e.key-1;
+  return null;
+}
+document.addEventListener('keydown',e=>{if(!active||!$('onboard').hidden)return;const v=gameKey(e);if(v===null)return;e.preventDefault();if(!pending||e.repeat)return;respond(v)},true);
+document.addEventListener('keyup',e=>{if(active&&gameKey(e)!==null)e.preventDefault()},true);
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&active)abortRun('A sessão foi interrompida porque a página ficou oculta. Recomece para manter as condições de prática.')});
+
+route();
+</script>
+</body>
+</html>
